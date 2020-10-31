@@ -14,7 +14,7 @@ const state = {
     selectTime: null,
     isLoading: false,
 }
-
+const api_url = ' https://borrowroombackend.herokuapp.com'
 const getters = {}
 
 const actions = {
@@ -25,12 +25,12 @@ const actions = {
             user_email: googleUser.getBasicProfile().getEmail(),
             user_name: googleUser.getBasicProfile().getName(),
         })
-        await axios.post('http://localhost:8000/google/', { token: token }).then((res) => console.log(res))
+        await axios.post(`${api_url}/google/`, { token: token }).then((res) => console.log(res))
         router.push('/allRooms')
     },
     async getRoomPage({ commit }) {
         await axios
-            .get('http://localhost:8000/RoomModule', {
+            .get(`${api_url}/RoomModule/`, {
                 params: {
                     function: 'get_room_page',
                     access_token: this.state.room.tokens.access_token,
@@ -42,7 +42,7 @@ const actions = {
     },
     async getRoomData({ commit }, room_name) {
         await axios
-            .post('http://localhost:8000/RoomModule/', {
+            .post(`${api_url}/RoomModule/`, {
                 function: 'get_room_data',
                 room_name: room_name,
                 access_token: this.state.room.tokens.accessToken,
@@ -54,7 +54,7 @@ const actions = {
     },
     async createNewBorrow({ commit }, createInfo) {
         await axios
-            .post('http://localhost:8000/RoomModule/', {
+            .post(`${api_url}/RoomModule/`, {
                 function: 'create_new_borrow',
                 data: createInfo,
                 access_token: this.state.room.tokens.accessToken,
@@ -68,7 +68,7 @@ const actions = {
         let userInfo = { user_name: data }
         this.state.room.isLoading = true
         await axios
-            .post('http://localhost:8000/RoomModule/', {
+            .post(`${api_url}/RoomModule/`, {
                 function: 'get_user_borrow_data',
                 userInfo,
                 access_token: this.state.room.tokens.accessToken,
@@ -80,7 +80,7 @@ const actions = {
     },
     async delete_user_borrow_data({ commit }, data) {
         await axios
-            .post('http://localhost:8000/RoomModule/', {
+            .post(`${api_url}/RoomModule/`, {
                 function: 'delete_user_borrow_data',
                 data,
                 access_token: this.state.room.tokens.accessToken,

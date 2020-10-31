@@ -72,7 +72,6 @@ video {
     vertical-align: baseline;
     z-index: 99;
     text-decoration: none;
-
     font-family: 'Noto Sans TC', sans-serif;
 }
 
