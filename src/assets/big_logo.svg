@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540.448" height="863.921" viewBox="0 0 540.448 863.921">
+    <defs>
+        <filter id="Path_31" width="261.467" height="607.4" x="206.145" y="256.52" filterUnits="userSpaceOnUse">
+            <feOffset dx="-5" dy="5"/>
+            <feGaussianBlur result="blur" stdDeviation="5.5"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <filter id="Ellipse_4" width="394.026" height="385.259" x="146.422" y="0" filterUnits="userSpaceOnUse">
+            <feOffset dx="-6" dy="2"/>
+            <feGaussianBlur result="blur-2" stdDeviation="6"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur-2" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <filter id="Ellipse_7" width="375.329" height="367.815" x="151.818" y="17.445" filterUnits="userSpaceOnUse">
+            <feOffset dx="-3" dy="3"/>
+            <feGaussianBlur result="blur-3" stdDeviation="11.5"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur-3" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <filter id="Ellipse_6" width="275.374" height="250.245" x="0" y="196.566" filterUnits="userSpaceOnUse">
+            <feOffset dx="-10" dy="7"/>
+            <feGaussianBlur result="blur-4" stdDeviation="6"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur-4" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <radialGradient id="radial-gradient" cx=".15" cy=".545" r="1.093" gradientTransform="rotate(-3.04 .155 .551)" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#d5c036"/>
+            <stop offset="1" stop-color="#96c45a"/>
+        </radialGradient>
+        <style>
+            .cls-2{fill:#96c45a}
+        </style>
+    </defs>
+    <g id="Group_41" opacity="0.65">
+        <g filter="url(#Path_31)" transform="rotate(3 3512.685 -25308.394) translate(1329.35 149.16)">
+            <path id="Path_31-2" d="M14224.591-895.351s60.8 98.759 79.433 136.129 45.064 82.333 60.087 182.354 0 217.73 0 217.73l59.663-56.348s-10.416-138.576-54.622-259.7-93.454-174.614-122.2-224.793c-17.146-29.921-17.835-23.283-17.835-23.283z" class="cls-2" transform="rotate(3 -15517.78 -267024.517)"/>
+        </g>
+        <g filter="url(#Ellipse_4)" transform="rotate(3 3512.685 -25308.394) translate(1329.35 149.16)">
+            <ellipse id="Ellipse_4-2" cx="136.481" cy="126.451" class="cls-2" rx="136.481" ry="126.451" transform="rotate(-27 376.614 -284.965)"/>
+        </g>
+        <g filter="url(#Ellipse_7)" transform="rotate(3 3512.685 -25308.394) translate(1329.35 149.16)">
+            <ellipse id="Ellipse_7-2" cx="116.779" cy="108.182" fill="url(#radial-gradient)" rx="116.779" ry="108.182" transform="rotate(-27 417.43 -316.797)"/>
+        </g>
+        <g filter="url(#Ellipse_6)" transform="rotate(3 3512.685 -25308.394) translate(1329.35 149.16)">
+            <ellipse id="Ellipse_6-2" cx="116.158" cy="103.131" class="cls-2" rx="116.158" ry="103.131" transform="rotate(2 -5928.239 1112.088)"/>
+        </g>
+    </g>
+</svg>

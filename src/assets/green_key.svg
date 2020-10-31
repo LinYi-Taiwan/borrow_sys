@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54">
+    <defs>
+        <filter id="Ellipse_32" width="54" height="54" x="0" y="0" filterUnits="userSpaceOnUse">
+            <feOffset/>
+            <feGaussianBlur result="blur" stdDeviation="3"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <style>
+            .cls-7{fill:none}.cls-5{stroke:none}
+        </style>
+    </defs>
+    <g id="Group_233" transform="translate(8 7.513)">
+        <g filter="url(#Ellipse_32)" transform="translate(-8 -7.51)">
+            <circle id="Ellipse_32-2" cx="18" cy="18" r="18" fill="#b1ca70" transform="translate(9 9)"/>
+        </g>
+        <g id="Group_32" transform="matrix(.998 .07 -.07 .998 8.938 8.841)">
+            <g id="Path_24" fill="none">
+                <path d="M0 2.274L2.786 0l2.666 2.274V13.6H0z" class="cls-5" transform="rotate(-50 4.479 2.088)"/>
+                <path fill="#fff" d="M2.75 3.256l-.25.205v7.642h.452V3.428l-.201-.172M2.786 0l2.666 2.274v11.33H0V2.273L2.786 0z" transform="rotate(-50 4.479 2.088)"/>
+            </g>
+            <g id="Ellipse_1" fill="none" stroke="#fffefe" stroke-width="2.5px" transform="translate(9.567 7.759)">
+                <circle cx="6.061" cy="6.061" r="6.061" class="cls-5"/>
+                <circle cx="6.061" cy="6.061" r="4.811" class="cls-7"/>
+            </g>
+            <g id="Ellipse_2" fill="#fff" stroke="#fff" stroke-width="2px" transform="translate(15.984 12.751)">
+                <circle cx="1.426" cy="1.426" r="1.426" class="cls-5"/>
+                <circle cx="1.426" cy="1.426" r=".426" class="cls-7"/>
+            </g>
+        </g>
+    </g>
+</svg>

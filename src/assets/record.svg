@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.03" height="24.036" viewBox="0 0 20.03 24.036">
+    <defs>
+        <style>
+            .cls-2{fill:none;stroke:#fff;stroke-linecap:round;stroke-width:2.5px}
+        </style>
+    </defs>
+    <g id="Group_279" transform="translate(-20 -290.736)">
+        <g id="Path_38" fill="none" stroke="none">
+            <path d="M2.5 0h15.026a2.5 2.5 0 0 1 2.5 2.5v19.033a2.5 2.5 0 0 1-2.5 2.5H2.5a2.5 2.5 0 0 1-2.5-2.5V2.5A2.5 2.5 0 0 1 2.5 0z" transform="translate(20 290.736)"/>
+            <path fill="#fff" d="M3 3v18.036h14.03V3H3m-.496-3h15.022c1.383 0 2.504 1.121 2.504 2.504v19.029c0 1.382-1.12 2.503-2.504 2.503H2.504C1.12 24.036 0 22.916 0 21.533V2.503C0 1.122 1.121 0 2.504 0z" transform="translate(20 290.736)"/>
+        </g>
+        <g id="Group_281" transform="translate(.5)">
+            <path id="Line_5" d="M0 0L6.595 0" class="cls-2" transform="translate(26.5 298.748)"/>
+            <path id="Line_6" d="M0 0L6.595 0" class="cls-2" transform="translate(26.5 302.754)"/>
+            <path id="Line_7" d="M0 0L6.595 0" class="cls-2" transform="translate(26.5 306.76)"/>
+        </g>
+    </g>
+</svg>

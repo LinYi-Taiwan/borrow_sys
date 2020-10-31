@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40.299" height="47.496" viewBox="0 0 40.299 47.496">
+    <defs>
+        <radialGradient id="radial-gradient" cx=".15" cy=".545" r="1.093" gradientTransform="rotate(-3.04 .155 .551)" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#d5c036"/>
+            <stop offset="1" stop-color="#96c45a"/>
+        </radialGradient>
+        <style>
+            .cls-1{fill:#96c45a}
+        </style>
+    </defs>
+    <g id="Group_288" transform="translate(-664.25 -249.519)">
+        <path id="Path_31" d="M0 1.693s4.883 5.859 6.38 8.076a25.514 25.514 0 0 1 4.827 10.818 40.906 40.906 0 0 1 0 12.917L16 30.162a51.418 51.418 0 0 0-4.387-15.407C8.061 7.569 4.1 4.4 1.8 1.419.418-.357.363.037.363.037z" class="cls-1" transform="rotate(20 -396.317 2065.602)"/>
+        <ellipse id="Ellipse_4" cx="10.431" cy="9.664" class="cls-1" rx="10.431" ry="9.664" transform="rotate(-3 5126.576 -12910.42)"/>
+        <ellipse id="Ellipse_7" cx="8.925" cy="8.268" fill="url(#radial-gradient)" rx="8.925" ry="8.268" transform="rotate(-3 5158.278 -12925.85)"/>
+        <ellipse id="Ellipse_6" cx="8.878" cy="7.882" class="cls-1" rx="8.878" ry="7.882" transform="rotate(26 -208.301 1579.124)"/>
+    </g>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="249" height="55" viewBox="0 0 249 55">
+    <defs>
+        <filter id="Rectangle_5" width="249" height="55" x="0" y="0" filterUnits="userSpaceOnUse">
+            <feOffset/>
+            <feGaussianBlur result="blur" stdDeviation="4"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <style>
+            .cls-1,.cls-6{fill:none}.cls-1{stroke:#fff;stroke-width:3px}.cls-5{stroke:none}
+        </style>
+    </defs>
+    <g id="Group_118" transform="translate(12 12.098)">
+        <g id="Group_113">
+            <g filter="url(#Rectangle_5)" transform="translate(-12 -12.1)">
+                <g id="Rectangle_5-2" class="cls-1" transform="translate(12 12)">
+                    <rect width="225" height="31" class="cls-5" rx="15.5"/>
+                    <rect width="222" height="28" x="1.5" y="1.5" class="cls-6" rx="14"/>
+                </g>
+            </g>
+            <g id="Group_198" transform="translate(11.583 6.008)">
+                <g id="Group_197" transform="rotate(9 1.223 15.54)">
+                    <g id="Ellipse_11" fill="none" stroke="#fff" stroke-width="2px">
+                        <circle cx="5.89" cy="5.89" r="5.89" class="cls-5"/>
+                        <circle cx="5.89" cy="5.89" r="4.89" class="cls-6"/>
+                    </g>
+                    <rect id="Rectangle_36" width="9.424" height="2.356" fill="#fff" rx="1.178" transform="rotate(38 -6.353 19.17)"/>
+                    <path id="Path_58" fill="none" stroke="#fff" stroke-linecap="round" d="M.278 0a3.015 3.015 0 0 0 .55 3.318 2.634 2.634 0 0 0 2.972.46" transform="rotate(-12 25.259 -13.525)"/>
+                </g>
+                <path id="Line_17" d="M0 0L0 27.136" class="cls-1" transform="translate(24.417 -4.159)"/>
+            </g>
+        </g>
+    </g>
+</svg>

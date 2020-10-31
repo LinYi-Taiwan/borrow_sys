@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18.469" viewBox="0 0 17 18.469">
+    <defs>
+        <style>
+            .cls-6,.cls-8{fill:none}.cls-6{stroke:#fff;stroke-linecap:round;stroke-width:1.25px}.cls-7{stroke:none}
+        </style>
+    </defs>
+    <g id="Group_354" transform="translate(-12 -11.137)">
+        <g id="Rectangle_69" fill="none" stroke="#fff" stroke-width="2px" transform="translate(12 11.137)">
+            <rect width="15" height="18" class="cls-7" rx="2"/>
+            <rect width="13" height="16" x="1" y="1" class="cls-8" rx="1"/>
+        </g>
+        <g id="Ellipse_51" fill="#fff" stroke="#7e9a58" transform="translate(21 19.137)">
+            <circle cx="4" cy="4" r="4" class="cls-7"/>
+            <circle cx="4" cy="4" r="3.5" class="cls-8"/>
+        </g>
+        <g id="Ellipse_52" fill="#7e9a58" stroke="#fff" transform="translate(22 20.137)">
+            <circle cx="3" cy="3" r="3" class="cls-7"/>
+            <circle cx="3" cy="3" r="2.5" class="cls-8"/>
+        </g>
+        <g id="Rectangle_70" fill="#7e9a58" stroke="#7e9a58" stroke-width="0.5px">
+            <path d="M0 0H2V3H0z" class="cls-7" transform="scale(-1) rotate(-29 -69.232 39.389)"/>
+            <path d="M0.25 0.25H1.75V2.75H0.25z" class="cls-8" transform="scale(-1) rotate(-29 -69.232 39.389)"/>
+        </g>
+        <rect id="Rectangle_71" width="1" height="4" fill="#fff" rx=".5" transform="rotate(152 10.615 17.938)"/>
+        <path id="Line_114" d="M0 0L6 0" class="cls-6" transform="translate(16.5 16.637)"/>
+        <path id="Line_115" d="M0 0L6 0" class="cls-6" transform="translate(16.5 19.637)"/>
+        <path id="Line_116" d="M0 0L4 0" class="cls-6" transform="translate(16.5 22.637)"/>
+    </g>
+</svg>

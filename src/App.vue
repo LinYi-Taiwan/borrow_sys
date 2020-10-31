@@ -1,32 +1,137 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <sideBar class="sideBar" v-if="`${this.$route.name}` !== 'login'" />
+        <myNav v-if="`${this.$route.name}` !== 'login' && $store.state.room.isLoading === false"></myNav>
+        <loading class="loading-component" v-if="$store.state.room.isLoading === true" />
+        <router-view class="router-view" v-show="$store.state.room.isLoading === false" />
+        <footer>
+            <div>© 國立東華大學諮商與臨床心理學系｜教室借用系統｜NDHUCCP</div>
+        </footer>
     </div>
-    <router-view />
-  </div>
 </template>
 
+<script>
+import axios from 'axios'
+import myNav from '@/components/myNav'
+import sideBar from '@/components/SideBar'
+import loading from '@/components/Loading'
+export default {
+    name: 'App',
+    components: { myNav, sideBar, loading },
+    data() {
+        return {
+            router_name: null,
+        }
+    },
+    created() {
+        console.log(process.env)
+        console.log(process)
+    },
+    mounted() {
+        console.log(process.env)
+        // alert(navigator.userAgent);
+    },
+}
+</script>
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+html,
+body,
+div,
+span,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+a,
+img,
+i,
+li,
+form,
+label,
+legend,
+table,
+tr,
+th,
+td,
+footer,
+header,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    z-index: 99;
+    text-decoration: none;
+
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    color: #2c3e50;
+    height: 100vh;
+    min-width: 1200px;
+    background-color: #ebde9e;
+    overflow: auto;
+    /* background: url("assets/backgroundImage.svg"); */
+    background-size: cover;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+html {
+    overflow: -moz-hidden-unscrollable; /*注意！若只打 hidden，chrome 的其它 hidden 會出問題*/
+    height: 100%;
 }
 
-#nav {
-  padding: 30px;
+body {
+    height: 100%;
+    width: 100vw; /*瀏覽器滾動條的長度大約是 18px*/
+    overflow: auto;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.big-logo {
+    height: 100%;
+    position: fixed;
+    right: -160px;
+    top: -28px;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.sideBar {
+    position: absolute;
+    z-index: 1000;
+}
+footer {
+    background-color: #7e9a58;
+    position: fixed;
+    bottom: 0;
+    min-width: 1200px;
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+}
+footer div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: white;
+    font-size: 13px;
+    margin: auto;
+}
+.loading-component {
+    width: 100%;
+    height: 100%;
+}
+.router-view {
+    /* height: calc(100% - 177px); */
+    margin-bottom: 100px;
+    margin-left: 58px;
 }
 </style>

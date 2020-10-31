@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26.663" height="27.264" viewBox="0 0 26.663 27.264">
+    <defs>
+        <style>
+            .cls-6{fill:none}.cls-4{stroke:none}
+        </style>
+    </defs>
+    <g id="Group_277" transform="translate(-13.066 -215.84)">
+        <g id="Path_24" fill="none">
+            <path d="M0 2.861L3.5 0l3.359 2.861v14.251H0z" class="cls-4" transform="rotate(-44.03 279.351 94.146)"/>
+            <path fill="#fff" d="M3.462 3.907L3 4.285v9.827h.859V4.245l-.397-.338M3.504 0L6.86 2.861v14.251H0V2.861L3.504 0z" transform="rotate(-44.03 279.351 94.146)"/>
+        </g>
+        <g id="Ellipse_1" fill="none" stroke="#fffefe" stroke-width="3px" transform="rotate(6.02 -2137.43 346.4)">
+            <circle cx="7.625" cy="7.625" r="7.625" class="cls-4"/>
+            <circle cx="7.625" cy="7.625" r="6.125" class="cls-6"/>
+        </g>
+        <g id="Ellipse_2" fill="#fff" stroke="#fff" stroke-width="2px" transform="rotate(6.02 -2201.074 419.968)">
+            <circle cx="1.794" cy="1.794" r="1.794" class="cls-4"/>
+            <circle cx="1.794" cy="1.794" r=".794" class="cls-6"/>
+        </g>
+    </g>
+</svg>
