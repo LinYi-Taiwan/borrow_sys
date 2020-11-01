@@ -7,7 +7,7 @@ set -e
 # npm run build
 
 # cd 到构建输出的目录下 
-# cd dist
+cd dist
 
 # 部署到自定义域域名
 # echo 'www.example.com' > CNAME
@@ -21,7 +21,7 @@ git commit -m 'deploy'
 
 # 部署到 https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:LinYi-Taiwan/borrow_sys.git master:gh-pages
-# git push -f https://github.com/LinYi-Taiwan/borrow_sys.git master:gh-pages
-git push -f https://github.com/LinYi-Taiwan/borrow_sys.git master:master
+git push -f https://github.com/LinYi-Taiwan/borrow_sys.git master:gh-pages
+# git push -f https://github.com/LinYi-Taiwan/borrow_sys.git master:master
 
 cd -
