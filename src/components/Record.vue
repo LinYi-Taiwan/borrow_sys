@@ -187,7 +187,6 @@ th {
     line-height: 60px;
     border: solid 2.5px rgb(255, 255, 255, 1);
     white-space: nowrap;
-    overflow: hidden;
     max-width: 100px;
     text-overflow: ellipsis;
     padding: 0 10px 0 10px;
@@ -277,7 +276,6 @@ textarea:focus {
 }
 .record-svg {
     filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.3));
-
     width: 20.4px;
     height: 24.5px;
     background: url('../assets/record.svg') center;
@@ -292,7 +290,6 @@ textarea:focus {
     width: 100vw;
     height: calc(90% - 108px);
     z-index: 1000;
-    transition: 1s;
 }
 .alert-modal {
     position: absolute;
@@ -301,7 +298,6 @@ textarea:focus {
     opacity: 0.85;
     border-radius: 22px;
     background-color: #ffffff;
-    transition: 1s;
 }
 .alert-content {
     text-align: center;

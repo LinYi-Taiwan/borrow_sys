@@ -81,7 +81,7 @@ video {
     min-width: 1200px;
     background-color: #ebde9e;
     overflow: auto;
-    /* background: url("assets/backgroundImage.svg"); */
+    background: url('assets/backgroundImage.svg');
     background-size: cover;
 }
 body::-webkit-scrollbar {

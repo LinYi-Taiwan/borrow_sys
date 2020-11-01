@@ -89,6 +89,7 @@ export default {
     box-sizing: border-box;
     opacity: 0.85;
     transition: 0.5s;
+    position: absolute;
 }
 .box:hover .button-box {
     display: flex;
