@@ -14,8 +14,8 @@ const state = {
     selectTime: null,
     isLoading: false,
 }
-const api_url = 'https://borrowroombackend.herokuapp.com'
-// const api_url = 'http://localhost:8000'
+// const api_url = 'https://borrowroombackend.herokuapp.com'
+const api_url = 'http://localhost:8000'
 
 const getters = {}
 

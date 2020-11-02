@@ -25,12 +25,8 @@ export default {
     },
     created() {
         console.log(process.env)
-        console.log(process)
     },
-    mounted() {
-        console.log(process.env)
-        // alert(navigator.userAgent);
-    },
+    mounted() {},
 }
 </script>
 
@@ -132,5 +128,22 @@ footer div {
     /* height: calc(100% - 177px); */
     margin-bottom: 100px;
     margin-left: 58px;
+}
+@media only screen and (max-width: 1200px) {
+    #app {
+        width: 100vw;
+        height: 100%;
+        min-width: 0;
+    }
+    footer {
+        min-width: 0px;
+        height: 12.7vw;
+        line-height: 12.7vw;
+    }
+    footer div {
+        font-size: 3.2vw;
+        width: auto;
+        text-align: center;
+    }
 }
 </style>

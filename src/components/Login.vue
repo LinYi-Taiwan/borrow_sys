@@ -1,7 +1,7 @@
 <template>
     <div class="loginPage">
         <div class="loginBox">
-            <div class="head">
+            <div>
                 <div class="title-box">
                     <div class="logo"></div>
                     <!-- <img class="logo" src="../assets/logo.svg" alt="" /> -->
@@ -18,19 +18,10 @@
                 </div>
                 <div class="google-login-text">使用GOOGLE帳號登入</div>
             </div>
-            <!-- <img
-        class="login-button"
-        @click="onSuccess"
-        src="../assets/login.svg"
-        alt=""
-      /> -->
 
             <GoogleLogin :params="params" :onSuccess="onSuccess" :onFailure="onFailure" class="login-container">
                 <img class="login-button" src="../assets/login.svg" alt="" />
             </GoogleLogin>
-            <!-- <div class="sign-in">
-        SIGN IN
-      </div> -->
         </div>
     </div>
 </template>
@@ -49,7 +40,7 @@ export default {
             incorrectAuth: false,
             // client_id is the only required property but you can add several more params, full list down bellow on the Auth api section
             params: {
-                client_id: '523694584460-tnf9tiocqnob8tgispm7c4pc4n06r18e.apps.googleusercontent.com',
+                client_id: '895240667973-qg6t46ve6ar1rjjdqh1ai5ha4gidsn2a.apps.googleusercontent.com',
             },
             // only needed if you want to render the button with the google ui
             renderParams: {
@@ -99,11 +90,7 @@ export default {
     box-shadow: 0 6px 99px 0 rgba(0, 0, 0, 0.16);
     background-color: #ffffff;
 }
-.head {
-    width: 100%;
-}
 .title-up {
-    width: 167px;
     height: 20px;
     font-size: 18px;
     line-height: 20px;
@@ -111,7 +98,6 @@ export default {
     margin: auto;
 }
 .title-down {
-    width: 175px;
     height: 32px;
     font-size: 28px;
     color: #96c45a;
@@ -143,9 +129,53 @@ export default {
     display: flex;
 }
 .logo {
-    background: url('../assets/logo.svg');
-    width: 62px;
-    height: 55px;
-    margin-left: 47px;
+    background: url('../assets/logo.svg') center;
+    background-size: cover;
+    width: 44px;
+    height: 52px;
+}
+@media only screen and (max-width: 1200px) {
+    .loginBox {
+        border-radius: 6.6vw;
+        width: 58.6vw;
+        height: 52.7vw;
+        box-shadow: 0;
+        box-shadow: 0 6px 99px 0 rgba(0, 0, 0, 0);
+        background-color: rgba(255, 255, 255, 0);
+    }
+
+    .login-container {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    .logo {
+        width: 12.75vw;
+        height: 14.66vw;
+        background: url('../assets/mobile_logo.svg') center;
+        background-size: cover;
+    }
+    .title-up {
+        letter-spacing: 0.3vw;
+        color: #686b63;
+        font-size: 4.4vw;
+    }
+    .title-down {
+        letter-spacing: 0.3vw;
+        color: #686b63;
+        font-size: 6.6vw;
+    }
+    .line {
+        width: 58.3vw;
+        border-top: solid 0.5vw #707070;
+        margin-top: 3.5vw;
+        margin-bottom: 7.4vw;
+    }
+    .google-login-text {
+        font-size: 4.4vw;
+        margin-bottom: 3.6vw;
+    }
+    .login-button {
+        width: 48.2vw;
+        height: 10.7vw;
+    }
 }
 </style>

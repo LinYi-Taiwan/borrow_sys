@@ -2,6 +2,9 @@
 
 module.exports = {
     publicPath: './',
+    pwa: {
+        iconPaths: { favicon16: 'favicon.ico' },
+    },
     // pwa: {
     //     name: 'My App',
     //     themeColor: '#4DBA87',
@@ -13,7 +16,7 @@ module.exports = {
     //     workboxPluginMode: 'InjectManifest',
     //     workboxOptions: {
     //         // swSrc is required in InjectManifest mode.
-    //         // swSrc: 'dev/sw.js',
+    //         swSrc: 'dev/sw.js',
     //         // ...other Workbox options...
     //     },
     // },

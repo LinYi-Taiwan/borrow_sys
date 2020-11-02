@@ -29,6 +29,10 @@
                     </div>
                 </div>
                 <div class="mid">
+                    <div class="description-field">
+                        <div class="gray-block"></div>
+                        <div class="description">此空間已借用/超出時間</div>
+                    </div>
                     <div class="square_box" ref="square">
                         <div
                             class="time_square"
@@ -310,7 +314,7 @@ export default {
     display: flex;
 }
 .disable {
-    background-color: #909986;
+    background-color: rgba(144, 153, 134, 0.6);
 }
 .scheduled {
     background-color: lightgreen;
@@ -422,7 +426,6 @@ select {
     border: solid 0px white;
     border-radius: 20px;
     background-color: #7e9a58;
-    color: white;
     font-weight: bold;
     font-size: 12px;
     line-height: 23.6px;
@@ -500,5 +503,22 @@ button {
     right: 0;
     margin: 21.3px 21.3px 0 0;
     cursor: pointer;
+}
+.description-field {
+    display: flex;
+    margin-bottom: 12.1px;
+}
+.gray-block {
+    width: 13px;
+    height: 13px;
+    background-color: rgba(144, 153, 134, 0.6);
+    border: solid 2px white;
+    border-radius: 3px;
+}
+.description {
+    width: auto;
+    font-size: 10px;
+    color: #686b63;
+    margin-left: 6px;
 }
 </style>

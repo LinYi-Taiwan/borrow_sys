@@ -1,6 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="98" height="98" viewBox="0 0 98 98">
-    <g fill="none" stroke="#96c45a" stroke-dasharray="14 37" stroke-linecap="round" stroke-width="7px">
-        <circle cx="49" cy="49" r="49" stroke="none"/>
-        <circle cx="49" cy="49" r="45.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="87.038" height="83.188" viewBox="0 0 87.038 83.188">
+    <g>
+        <g transform="translate(3 3)">
+            <ellipse cx="40.519" cy="38.594" fill="none" stroke="#96c45a" stroke-dasharray="7 34" stroke-linecap="round" stroke-miterlimit="10" stroke-width="6px" rx="40.519" ry="38.594"/>
+        </g>
     </g>
 </svg>

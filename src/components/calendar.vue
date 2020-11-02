@@ -254,7 +254,7 @@ export default {
     text-align: center;
     color: #686b63;
     line-height: 40px;
-    margin-left: -4px;
+    margin-left: -3px;
     border: solid 2px rgba(255, 255, 255, 0);
 }
 .day:hover:not(.hidden):not(.click-on):not(.disable) {
@@ -275,7 +275,7 @@ export default {
 .line {
     width: 247.4px;
     border-top: solid 4px #fffefe;
-    margin: 10.7px 33.7px 15.5px 15.7px;
+    margin: 10.7px 33.7px 10.7px 27.7px;
 }
 .weekday-box {
     width: 270px;
@@ -293,7 +293,7 @@ export default {
     color: #fcfcfc;
 }
 .weekday-margin:not(:last-child) {
-    margin-right: 20.3px;
+    margin-right: 21.4px;
 }
 .change-page {
     cursor: pointer;
