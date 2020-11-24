@@ -5,15 +5,10 @@
             <div class="calendar">
                 <div class="calendar-nav">
                     <div class="change-page" v-if="!preMonthDisabled"></div>
-                    <img
-                        class="change-page"
-                        src="../assets/left.svg"
-                        @click="preMonth()"
-                        v-if="preMonthDisabled"
-                        alt=""
-                    />
+                    <div class="change-page last-page" @click="preMonth()" v-if="preMonthDisabled"></div>
+
                     <div class="nav-button">{{ currentDate.month }}月,{{ currentDate.year }}</div>
-                    <img class="change-page" src="../assets/right.svg" @click="nextMonth()" alt="" />
+                    <div class="change-page next-page" @click="nextMonth()"></div>
                 </div>
                 <div class="line"></div>
                 <div class="weekday-box">
@@ -300,6 +295,14 @@ export default {
     width: 15px;
     height: 15px;
 }
+.next-page {
+    background: url('../assets/next_page.svg') center;
+    background-size: cover;
+}
+.last-page {
+    background: url('../assets/last_page.svg') center;
+    background-size: cover;
+}
 
 .nav-button {
     width: 104px;
@@ -314,5 +317,60 @@ export default {
 .disable {
     color: #b4b48f;
     cursor: not-allowed;
+}
+@media only screen and (max-width: 1024px) {
+    .page-title {
+        margin: auto;
+        margin-bottom: 3vw;
+        color: white;
+        letter-spacing: 4.14px;
+    }
+    .calendar {
+        width: 80vw;
+        max-height: 83.6vw;
+        height: auto;
+        padding: 0;
+        border-radius: 7vw;
+        padding-bottom: 4vw;
+    }
+    .weekday-box {
+        margin-left: 6.67vw;
+        width: auto;
+    }
+    .weekday {
+        width: 3.6vw;
+        height: 5.2vw;
+        font-size: 3.6vw;
+    }
+    .weekday-margin:not(:last-child) {
+        margin-right: 6vw;
+    }
+    .day {
+        font-size: 4.72vw;
+        height: 8.41vw;
+        width: 8.41vw;
+        margin-right: 2vw;
+        line-height: 8.41vw;
+    }
+    .day-box {
+        padding-left: 1vw;
+        width: auto;
+        height: auto;
+    }
+    .line {
+        width: 67vw;
+        margin: auto;
+        margin-top: 2.1vw;
+        margin-bottom: 2.72vw;
+    }
+    .change-page {
+        width: 2.54vw;
+        height: 2.54vw;
+    }
+    .calendar-nav {
+        margin-top: 2.77vw;
+        font-size: 2.77vw;
+        left: 0;
+    }
 }
 </style>

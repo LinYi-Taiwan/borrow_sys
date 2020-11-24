@@ -66,13 +66,16 @@ export default {
             console.log(info)
         },
     },
+    created() {
+        this.getRoomPage()
+    },
 }
 </script>
 
 <style scoped>
 .loginPage {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -125,6 +128,12 @@ export default {
     height: 38.5px;
     cursor: pointer;
 }
+.login-button:focus {
+    outline: none;
+}
+button:focus {
+    outline: none;
+}
 .title-box {
     display: flex;
 }
@@ -134,7 +143,7 @@ export default {
     width: 44px;
     height: 52px;
 }
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1024px) {
     .loginBox {
         border-radius: 6.6vw;
         width: 58.6vw;

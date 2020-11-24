@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="7.452" height="12.075" viewBox="0 0 7.452 12.075">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#eff4e2;stroke-linecap:round;stroke-width:2px}
+        </style>
+    </defs>
+    <g id="Component_9_10" transform="translate(1.414 1.414)">
+        <g id="Group_92" transform="rotate(-90 4.624 4.623)">
+            <path id="Line_15" d="M0 0L4.623 4.623" class="cls-1"/>
+            <path id="Line_16" d="M4.623 0L0 4.623" class="cls-1" transform="translate(4.623)"/>
+        </g>
+    </g>
+</svg>

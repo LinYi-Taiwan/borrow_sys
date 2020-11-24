@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import { register } from 'register-service-worker'
+import { NavigationFailureType } from 'vue-router'
 
 if (process.env.NODE_ENV === 'production' || 'development') {
     register(`${process.env.BASE_URL}service-worker.js`, {
@@ -11,6 +12,9 @@ if (process.env.NODE_ENV === 'production' || 'development') {
             )
         },
         registered() {
+            navigator.serviceWorker.register('service-worker.js').then((res) => {
+                console.log(res)
+            })
             console.log('Service worker has been registered.')
         },
         cached() {

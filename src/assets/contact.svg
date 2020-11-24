@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="97" height="97" viewBox="0 0 97 97">
+    <defs>
+        <pattern id="sg5erdvigb" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" viewBox="0 0 512 512"/>
+        <filter id="t0szzy2fqa" width="97" height="97" x="0" y="0" filterUnits="userSpaceOnUse">
+            <feOffset dx="2" dy="2"/>
+            <feGaussianBlur result="blur" stdDeviation="3"/>
+            <feFlood flood-opacity=".251"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g filter="url(#t0szzy2fqa)">
+        <rect width="79" height="79" fill="url(#sg5erdvigb)" rx="14" transform="translate(7 7)"/>
+    </g>
+</svg>

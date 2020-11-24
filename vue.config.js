@@ -3,7 +3,11 @@
 module.exports = {
     publicPath: './',
     pwa: {
-        iconPaths: { favicon16: 'favicon.ico' },
+        workboxPluginMode: 'InjectManifest',
+        workboxOptions: {
+            swSrc: 'service-worker.js',
+        },
+        themeColor: '#8bc34a',
     },
     // pwa: {
     //     name: 'My App',

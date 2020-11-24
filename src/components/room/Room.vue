@@ -1,19 +1,15 @@
 <template>
     <div class="room">
-        <div class="page">
-            <div class="key-svg"></div>
-            <div class="page-text">教室借用</div>
-        </div>
         <div class="content">
-            <div class="calendar">
-                <Calendar />
-            </div>
+            <Calendar />
+
             <div class="right">
                 <div class="up">
                     <div class="select-time">
                         {{ this.$store.state.room.selectTime }}
                     </div>
                     <div class="select">
+                        <div class="select-label">開始時間</div>
                         <select v-model="start_time" name="start_select" id="start_select">
                             <option v-for="time in start_time_options" :key="time.time + 'start'" :value="time">{{
                                 time.time
@@ -21,7 +17,8 @@
                         </select>
                     </div>
                     <div class="select">
-                        <select v-model="end_time" name="end_select" id="end_select">
+                        <div class="select-label">結束時間</div>
+                        <select aria-placeholder="123test" v-model="end_time" name="end_select" id="end_select">
                             <option v-for="time in end_time_options" :key="time.time + 'end'" :value="time">{{
                                 time.time
                             }}</option>
@@ -33,9 +30,9 @@
                         <div class="gray-block"></div>
                         <div class="description">此空間已借用/超出時間</div>
                     </div>
-                    <div class="square_box" ref="square">
+                    <div class="square-box" ref="square">
                         <div
-                            class="time_square"
+                            class="time-square"
                             v-for="i in time_interval"
                             :key="i.id + 'time_interval'"
                             :class="{
@@ -47,10 +44,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="borrow-reason">
-                    借用事由
-                </div>
                 <div class="textarea-box">
+                    <div class="borrow-reason">
+                        借用事由
+                    </div>
                     <textarea type="text" v-model="borrow_reason" maxlength="30" placeholder="字數上限為30字..." />
                 </div>
                 <div class="submit-box">
@@ -116,7 +113,6 @@ export default {
         this.room_data = this.$store.state.roomData
         this.createTimeInterval()
         this.$store.state.room.isLoading = false
-        console.log(this.$store.state.room.selectTime)
     },
     computed: {
         getDataByDay() {
@@ -246,8 +242,6 @@ export default {
 </script>
 
 <style scoped>
-.calendar {
-}
 .room {
     display: flex;
     flex-direction: column;
@@ -279,7 +273,7 @@ export default {
     justify-content: center;
     width: 100%;
     height: 70%;
-    /* padding-left: 14.7vw; */
+    margin-top: 5%;
 }
 .up {
     display: flex;
@@ -288,7 +282,7 @@ export default {
 .mid {
     margin-bottom: 35.9px;
 }
-.time_square {
+.time-square {
     width: 11.8px;
     height: 15px;
     border: solid 1.5px white;
@@ -298,19 +292,19 @@ export default {
     transition: 0.5s;
     box-sizing: border-box;
 }
-.time_square:first-child {
+.time-square:first-child {
     width: 12px;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
     border-left: solid 3px white;
 }
-.time_square:last-child {
+.time-square:last-child {
     width: 11px;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
     border-right: solid 3px white;
 }
-.square_box {
+.square-box {
     display: flex;
 }
 .disable {
@@ -323,14 +317,12 @@ export default {
     display: flex;
     flex-direction: column;
     margin-left: 61px;
-    /* padding-top: ; */
 }
 .clock {
     position: relative;
     top: 18px;
     left: -5px;
     font-size: 11px;
-
     color: #686b63;
     letter-spacing: -0.39px;
 }
@@ -339,7 +331,6 @@ export default {
     height: 46.3px;
     background-color: #b3cd71;
     font-size: 13px;
-
     text-align: center;
     font-weight: bold;
     line-height: 46.3px;
@@ -359,21 +350,17 @@ export default {
 textarea {
     width: 570px;
     height: 105px;
-    border: solid 0px white;
     border-radius: 10px;
-    opacity: 0.3;
+    background-color: rgba(255, 255, 255, 0.3);
     padding-top: 27px;
     padding-left: 17px;
     resize: none;
     font-size: 12px;
     letter-spacing: 1.31px;
     box-sizing: border-box;
+    border: solid 3px white;
 }
 .textarea-box {
-    width: 569px;
-    height: 100px;
-    border: solid 3px white;
-    border-radius: 10px;
 }
 textarea:focus {
     outline-width: 0;
@@ -390,7 +377,6 @@ textarea:focus {
     letter-spacing: 1.31px;
     text-align: center;
     color: #686b63;
-    /* z-index: 1; */
 }
 .submit-box {
     width: 569px;
@@ -424,6 +410,7 @@ select {
     width: 120.2px;
     height: 29.6px;
     border: solid 0px white;
+    color: white;
     border-radius: 20px;
     background-color: #7e9a58;
     font-weight: bold;
@@ -432,12 +419,19 @@ select {
     letter-spacing: 1.31px;
     text-align: center;
     padding-left: 34px;
-    margin-top: 16px;
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
     background: url('../../assets/select.svg') no-repeat scroll center transparent;
 }
+.select-label {
+    margin-left: 10px;
+    font-size: 10px;
+    letter-spacing: 6.43px;
+    text-align: left;
+    color: #686b63;
+}
+
 textarea,
 select,
 input,
@@ -448,9 +442,8 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     width: 100vw;
-    height: calc(90% - 108px);
     z-index: 1000;
     padding: auto;
     transition: 1s;
@@ -483,10 +476,8 @@ button {
     width: 243px;
     height: 36px;
     border-radius: 51px;
-    /* border: solid 5px #ffffff; */
     background-color: #b3cd71;
     font-size: 18px;
-
     letter-spacing: 1.93px;
     text-align: center;
     margin: 0 auto;
@@ -520,5 +511,96 @@ button {
     font-size: 10px;
     color: #686b63;
     margin-left: 6px;
+}
+@media only screen and (max-width: 1024px) {
+    .content {
+        display: block;
+    }
+    .select-time {
+        width: 26.6vw;
+        height: 7.5vw;
+        line-height: 7.5vw;
+        box-sizing: border-box;
+        border-radius: 30.8vw;
+        margin: auto;
+        background-color: #b3cd71;
+        margin-right: 2vw;
+        font-size: 2.77vw;
+    }
+    .right {
+        margin: auto;
+    }
+    .up {
+        margin: 3vw auto;
+        padding-left: 5vw;
+    }
+    .square-box {
+        justify-content: center;
+    }
+    .time-square {
+        width: 1.8vw;
+        height: 3.7vw;
+        border: solid 0.1vw white;
+        border-top: solid 0.2vw white;
+        border-bottom: solid 0.2vw white;
+    }
+    .time-square:first-child {
+        width: 1.8vw;
+        border-left: solid 0.2vw white;
+    }
+    .time-square:last-child {
+        width: 1.8vw;
+        border-right: solid 0.2vw white;
+    }
+    .clock {
+        font-size: 2.1vw;
+        top: 4vw;
+    }
+    .mid {
+        margin: 0;
+    }
+    select {
+        width: 24vw;
+        height: 5.86vw;
+        padding-left: 4.77vw;
+        background-size: cover;
+    }
+    .select {
+        margin-right: 3.5vw;
+    }
+    .textarea-box {
+        width: 88vw;
+        margin: 5vw auto;
+    }
+    textarea {
+        width: 88vw;
+        height: 12.2vw;
+        padding-top: 1vw;
+        padding-left: 14vw;
+        font-size: 2.2vw;
+    }
+    .submit-box {
+        width: auto;
+        margin-bottom: 15vw;
+    }
+    .submit {
+        float: none;
+        margin: auto;
+    }
+    .borrow-reason {
+        width: 12.2vw;
+        height: 5.27vw;
+        font-size: 2.2vw;
+        top: 6vw;
+        line-height: 5.27vw;
+    }
+    .description-field {
+        width: fit-content;
+        margin: 2vw auto;
+        font-size: 2.2vw;
+    }
+    .alert-modal {
+        width: 90vw;
+    }
 }
 </style>

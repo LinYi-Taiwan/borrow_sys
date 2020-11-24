@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="863" height="23" viewBox="0 0 863 23">
+    <defs>
+        <style>
+            .cls-1{fill:#1c94ef}.cls-2{fill:#fcfcfc;font-size:14px;font-family:NotoSansTC-Medium,Noto Sans TC;font-weight:500;letter-spacing:.175em}.cls-3{fill:none;stroke:#1c94ef;stroke-linecap:round;stroke-width:4px}
+        </style>
+    </defs>
+    <g id="Group_479" transform="translate(-266 -424)">
+        <g id="Group_478" transform="translate(840)">
+            <circle id="Ellipse_56" cx="11.5" cy="11.5" r="11.5" class="cls-1" transform="translate(266 424)"/>
+            <circle id="Ellipse_57" cx="6.5" cy="6.5" r="6.5" class="cls-1" transform="translate(271 429)"/>
+            <text id="_4" class="cls-2" transform="translate(277 441)">
+                <tspan x="-3.99" y="0">4</tspan>
+            </text>
+        </g>
+        <path id="Line_117" d="M0 0L238 0" class="cls-3" transform="translate(298.5 435.5)"/>
+        <path id="Line_118" d="M0 0L238 0" class="cls-3" transform="translate(578.5 435.5)"/>
+        <path id="Line_119" d="M0 0L238 0" class="cls-3" transform="translate(858.5 435.5)"/>
+        <g id="Group_486">
+            <g id="Group_477" transform="translate(560)">
+                <circle id="Ellipse_56-2" cx="11.5" cy="11.5" r="11.5" class="cls-1" transform="translate(266 424)"/>
+                <circle id="Ellipse_57-2" cx="6.5" cy="6.5" r="6.5" class="cls-1" transform="translate(271 429)"/>
+            </g>
+            <text id="_3" class="cls-2" transform="translate(838 441)">
+                <tspan x="-3.99" y="0">3</tspan>
+            </text>
+        </g>
+        <g id="Group_485">
+            <g id="Group_476" transform="translate(280)">
+                <circle id="Ellipse_56-3" cx="11.5" cy="11.5" r="11.5" class="cls-1" transform="translate(266 424)"/>
+                <circle id="Ellipse_57-3" cx="6.5" cy="6.5" r="6.5" class="cls-1" transform="translate(271 429)"/>
+            </g>
+            <text id="_2" class="cls-2" transform="translate(558 441)">
+                <tspan x="-3.99" y="0">2</tspan>
+            </text>
+        </g>
+        <g id="Group_484">
+            <g id="Group_475">
+                <circle id="Ellipse_56-4" cx="11.5" cy="11.5" r="11.5" class="cls-1" transform="translate(266 424)"/>
+                <circle id="Ellipse_57-4" cx="6.5" cy="6.5" r="6.5" class="cls-1" transform="translate(271 429)"/>
+            </g>
+            <text id="_1" class="cls-2" transform="translate(277.5 441)">
+                <tspan x="-3.99" y="0">1</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

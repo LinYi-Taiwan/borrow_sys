@@ -8,11 +8,14 @@ const state = {
         user_email: null,
         user_name: null,
     },
-    roomPage: [],
+    roomPage: [{ name: 'test1', location: 'test1', contain_num: 'testNum' }],
     roomData: [],
     userData: [],
     selectTime: null,
     isLoading: false,
+    homeService: 'initial',
+    device: '',
+    showQuestion: false,
 }
 // const api_url = 'https://borrowroombackend.herokuapp.com'
 const api_url = 'http://localhost:8000'
@@ -28,7 +31,7 @@ const actions = {
             user_name: googleUser.getBasicProfile().getName(),
         })
         await axios.post(`${api_url}/google/`, { token: token }).then((res) => console.log(res))
-        router.push('/allRooms')
+        router.push('/home')
     },
     async getRoomPage({ commit }) {
         await axios
@@ -51,7 +54,6 @@ const actions = {
             })
             .then((res) => {
                 this.state.roomData = res.data
-                // commit("updateRoomData", res.data);
             })
     },
     async createNewBorrow({ commit }, createInfo) {
@@ -62,9 +64,7 @@ const actions = {
                 access_token: this.state.room.tokens.accessToken,
             })
             .then((res) => console.log(res))
-        router.push('/record')
-
-        // .then(res => console.log(res));
+        router.push('/home')
     },
     async get_user_borrow_data({ commit }, data) {
         let userInfo = { user_name: data }
@@ -84,6 +84,16 @@ const actions = {
         await axios
             .post(`${api_url}/RoomModule/`, {
                 function: 'delete_user_borrow_data',
+                data,
+                access_token: this.state.room.tokens.accessToken,
+            })
+            .then((res) => console.log(res))
+    },
+    async sendMessageToAdmin({ commit }, data) {
+        console.log(data)
+        await axios
+            .post(`${api_url}/RoomModule/`, {
+                function: 'send_line_notify',
                 data,
                 access_token: this.state.room.tokens.accessToken,
             })

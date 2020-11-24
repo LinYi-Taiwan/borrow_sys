@@ -5,10 +5,6 @@
                 <img class="cancel" @click="delete_alert = false" src="../assets/cancel.svg" alt="" />
                 <div class="alert-content">
                     <div class="alert-title">確認取消借用？</div>
-                    <!-- <div class="alert-text">借用教室：{{ this.$route.params.id }}</div>
-          <div class="alert-text">
-            借用日期：{{ this.$store.state.room.selectTime }}
-          </div> -->
                     <div class="alert-text">
                         <!-- 借用時段：{{ start_time.time }}~{{ end_time.time }} -->
                     </div>
@@ -18,56 +14,103 @@
                 </div>
             </div>
         </div>
-        <div class="page">
+
+        <div @click="show_modal = true" v-if="$store.state.room.device === 'phone'">
             <div class="record-svg"></div>
-            <div class="page-text">借用紀錄</div>
+            <div class="button-text">借用紀錄</div>
         </div>
 
-        <div class="table-box">
-            <div class="borrow-name">借用人：{{ $store.state.room.tokens.user_name }}</div>
-            <textarea
-                name=""
-                id=""
-                placeholder="搜尋關鍵字"
-                v-model="search_text"
-                onkeydown="if(event.keyCode==13)return false;"
-            ></textarea>
-            <table class="table-title">
-                <tr>
-                    <th @click="selectSearchField('room')">借用教室</th>
-                    <th @click="selectSearchField('borrow_reason')">借用事由</th>
-                    <th @click="selectSearchField('start_time')">借用日期</th>
-                    <th>借用時段</th>
-                    <th>狀態</th>
-                </tr>
-            </table>
-        </div>
-
-        <div class="table-box-content table-box">
-            <table class="table-content">
-                <tr v-for="(i, index) in dataSearch" :key="index">
-                    <td ref="room">{{ i.room }}</td>
-                    <td ref="borrow_reason">{{ i.borrow_reason }}</td>
-                    <td ref="start_time">{{ borrowDay(i.start_time) }}</td>
-                    <td ref="time">{{ borrowTime(i.start_time, i.end_time) }}</td>
-                    <td ref="status">
-                        <div class="status-img">
-                            <img
-                                v-if="recordStatus(i.start_time, i.end_time) === 'undue'"
-                                @click="edit(i)"
-                                class="undue"
-                                src="../assets/undue.svg"
-                                alt=""
-                            />
-                            <img
-                                v-if="recordStatus(i.start_time, i.end_time) === 'overtime'"
-                                src="../assets/overtime.svg"
-                                alt=""
-                            />
+        <div class="record-modal-box slide-top" v-show="show_modal" v-if="$store.state.room.device === 'phone'">
+            <div class="record-alert-modal">
+                <div class="record-alert-content">
+                    <div class="navbar">
+                        <div @click="show_modal = false" class="back-svg"></div>
+                        <div>
+                            <textarea v-model="search_text" placeholder="輸入搜尋教室..." />
                         </div>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+
+                    <div
+                        @click="show_reason(index)"
+                        class="borrow-record-box"
+                        v-for="(i, index) in dataSearch"
+                        :key="index"
+                    >
+                        <div class="record-left">
+                            <div class="borrow-record">
+                                <div class="date-circle">
+                                    <div class="mobile-month">{{ mobileBorrowDay(i.start_time).month }}</div>
+                                    <div>/</div>
+                                    <div class="mobile-day">{{ mobileBorrowDay(i.start_time).day }}</div>
+                                </div>
+                                <div class="mobile-nav">
+                                    <div class="mobile-room">{{ i.room }}</div>
+                                    <div class="mobile-time">{{ borrowTime(i.start_time, i.end_time) }}</div>
+                                </div>
+                            </div>
+                            <div :ref="index + 'reason'" v-show="target_index === index" class="mobile-reason">
+                                借用事由：{{ i.borrow_reason }}
+                            </div>
+                        </div>
+                        <div
+                            class="mobile-edit-box"
+                            v-if="target_index === index && recordStatus(i.start_time, i.end_time) === 'overtime'"
+                        >
+                            <img src="../assets/overtime.svg" alt="" />
+                        </div>
+                        <div
+                            :ref="index + 'cancel'"
+                            v-if="target_index === index && recordStatus(i.start_time, i.end_time) === 'undue'"
+                            @click="edit(i)"
+                            class="mobile-edit-box"
+                        >
+                            <div class="mobile-delete"></div>
+                            <div>刪除</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-if="$store.state.room.device === 'pc'">
+            <div>
+                <table class="table-title">
+                    <tr>
+                        <th @click="selectSearchField('room')">借用教室</th>
+                        <th @click="selectSearchField('borrow_reason')">借用事由</th>
+                        <th @click="selectSearchField('start_time')">借用日期</th>
+                        <th>借用時段</th>
+                        <th>狀態</th>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="table-box-content table-box">
+                <table>
+                    <tr v-for="(i, index) in dataSearch" :key="index">
+                        <td ref="room">{{ i.room }}</td>
+                        <td ref="borrow_reason">{{ i.borrow_reason }}</td>
+                        <td ref="start_time">{{ borrowDay(i.start_time) }}</td>
+                        <td ref="time">{{ borrowTime(i.start_time, i.end_time) }}</td>
+                        <td ref="status">
+                            <div class="status-img">
+                                <img
+                                    v-if="recordStatus(i.start_time, i.end_time) === 'undue'"
+                                    @click="edit(i)"
+                                    class="undue"
+                                    src="../assets/undue.svg"
+                                    alt=""
+                                />
+                                <img
+                                    v-if="recordStatus(i.start_time, i.end_time) === 'overtime'"
+                                    src="../assets/overtime.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </template>
@@ -79,9 +122,11 @@ export default {
     data() {
         return {
             select_delete_data: [],
-            select_field: '',
+            select_field: 'room',
             search_text: '',
             delete_alert: false,
+            show_modal: false,
+            target_index: '',
         }
     },
     async created() {
@@ -90,6 +135,7 @@ export default {
     computed: {
         dataSearch() {
             if (this.search_text === '') return this.$store.state.room.userData.data
+            console.log(this.$store.state.room.userData.data)
             return this.$store.state.room.userData.data.filter((data) =>
                 data[this.select_field].includes(this.search_text)
             )
@@ -99,6 +145,15 @@ export default {
         ...mapActions(['get_user_borrow_data', 'delete_user_borrow_data']),
         borrowDay(timeField) {
             return timeField.split('T')[0]
+        },
+        mobileBorrowDay(timeField) {
+            return {
+                month: (new Date(timeField).getMonth() + 1).toString().padStart(2, 0),
+                day: new Date(timeField)
+                    .getDate()
+                    .toString()
+                    .padStart(2, 0),
+            }
         },
         borrowTime(start_time, end_time) {
             let start = `${new Date(start_time).getHours()}:${new Date(start_time)
@@ -120,6 +175,7 @@ export default {
             if (today - start < 0) return 'undue'
         },
         edit(edit_data) {
+            console.log(edit_data)
             this.select_delete_data = edit_data
             this.delete_alert = true
         },
@@ -142,6 +198,9 @@ export default {
             }
             this.select_field = field
             this.$refs[this.select_field].forEach((element) => element.classList.add('select'))
+        },
+        show_reason(index) {
+            this.target_index === index ? (this.target_index = '') : (this.target_index = index)
         },
     },
     mounted() {},
@@ -167,15 +226,12 @@ export default {
     margin-left: 8px;
 }
 table {
-    width: 921.9px;
+    width: 771px;
     height: auto;
-    max-height: 200px;
+    max-height: 275px;
     border: solid 2.5px white;
     border-collapse: separate;
     border-spacing: 0;
-}
-tr {
-    /* transform: translateX(10px); */
 }
 td,
 th {
@@ -205,16 +261,15 @@ th {
 }
 .table-box {
     margin: auto;
-    max-height: 330px;
-    width: 951.9px;
+    max-height: 225px;
+    width: 771px;
     overflow: hidden;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom: solid 5px rgb(255, 255, 255, 1);
 }
 .table-box-content {
     margin-bottom: 50px;
-}
-.table-content {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
 }
 .table-title {
     border-top-right-radius: 8px;
@@ -224,14 +279,10 @@ th {
     overflow-y: auto;
     overflow-x: hidden;
 }
-.table-box::-webkit-scrollbar {
-    /* display: none; */
-}
 textarea {
     background: url('../assets/search.svg') no-repeat scroll center transparent;
     position: relative;
-    margin-right: 100px;
-    margin-bottom: 24px;
+    margin-left: 30px;
     float: right;
     width: 225px;
     height: 31px;
@@ -283,18 +334,16 @@ textarea:focus {
 }
 
 .modal-box {
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: calc(90% - 108px);
-    z-index: 1000;
+    z-index: 1001;
 }
 .alert-modal {
     position: absolute;
     width: 414px;
-    /* height: 330px; */
     opacity: 0.85;
     border-radius: 22px;
     background-color: #ffffff;
@@ -340,5 +389,176 @@ textarea:focus {
 }
 .select {
     background-color: #b3cd71;
+}
+.slide-top {
+    -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-top {
+    0% {
+        -webkit-transform: translateX(20px);
+        transform: translateX(20px);
+    }
+    100% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+    }
+}
+@keyframes slide-top {
+    0% {
+        -webkit-transform: translateX(20px);
+        transform: translateX(20px);
+    }
+    100% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .record-svg {
+        width: 7.6vw;
+        height: 9vw;
+        background: url('../assets/home_record.svg') center;
+        background-size: cover;
+        margin: auto;
+        margin-top: 5.27vw;
+    }
+    .button-text {
+        font-size: 2.77vw;
+        text-align: center;
+        margin-top: 2vw;
+    }
+    .function-box {
+        margin-top: 9vw;
+    }
+    .record-modal-box {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        width: 100vw;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        background: url('../assets/backgroundImage.svg') center;
+        background-size: cover;
+        height: auto;
+        min-height: 100vh;
+    }
+    .record-alert-modal {
+        width: 86vw;
+        height: 100%;
+    }
+    .record-alert-content {
+        text-align: center;
+        width: 100%;
+        letter-spacing: 1.71px;
+        color: #686b63;
+    }
+    .back-svg {
+        width: 3.9vw;
+        height: 6.16vw;
+        background: url('../assets/back.svg') center;
+        background-size: cover;
+        margin: auto 0;
+    }
+    .borrow-record-box {
+        width: 86.1vw;
+        /* height: 15.83vw; */
+        height: fit-content;
+        background-color: white;
+        border-radius: 15px;
+        margin-bottom: 2.1px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .borrow-record-box:last-child {
+        margin-bottom: 5vw;
+    }
+    .borrow-record {
+        position: relative;
+        display: flex;
+    }
+    .record-left {
+        width: 100%;
+        border-right: solid 1px rgba(104, 107, 99, 0.2);
+        margin: 1vw auto;
+    }
+    .date-circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 12.2vw;
+        height: 12.2vw;
+        border-radius: 50%;
+        background-color: #dfc62d;
+        margin: 1.66vw 5.5vw 1.66vw 2.77vw;
+    }
+    .date-circle div {
+        width: 3.7vw;
+        height: 3.7vw;
+        font-size: 3vw;
+        color: white;
+    }
+    .mobile-month {
+        line-height: 1vw;
+    }
+    .mobile-day {
+        line-height: 8vw;
+        position: relative;
+        right: 1vw;
+    }
+    .mobile-nav div {
+        letter-spacing: 4.1px;
+        color: #686b63;
+        text-align: left;
+    }
+    .mobile-room {
+        font-weight: bold;
+        font-size: 3.88vw;
+        margin-top: 2.5vw;
+        margin-bottom: 1.25vw;
+    }
+    .mobile-time {
+        font-size: 3.33vw;
+    }
+    .mobile-reason {
+        letter-spacing: 2.93px;
+        font-size: 2.77vw;
+        max-width: 63vw;
+        margin: auto;
+        text-align: left;
+        margin-bottom: 4vw;
+        word-break: break-all;
+    }
+    .mobile-edit-box {
+        height: 90%;
+        width: 13.75vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 2.77vw;
+        letter-spacing: 3.47px;
+    }
+    .mobile-delete {
+        background: url('../assets/red_cancel.svg') center;
+        background-size: cover;
+        width: 3vw;
+        height: 3vw;
+    }
+    .alert-modal {
+        width: 90vw;
+    }
+    .navbar {
+        display: flex;
+        margin-top: 10vw;
+        margin-bottom: 5vw;
+    }
+    textarea {
+        height: 7.5vw;
+    }
 }
 </style>
