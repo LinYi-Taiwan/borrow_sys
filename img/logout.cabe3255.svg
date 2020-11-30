@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23.988" height="20.177" viewBox="0 0 23.988 20.177">
+    <defs>
+        <style>
+            .cls-1,.cls-2{fill:none;stroke:#fff;stroke-linecap:round}.cls-1{stroke-width:4px}.cls-2{stroke-width:3px}
+        </style>
+    </defs>
+    <g id="Group_266" transform="translate(2 2.177)">
+        <g id="Group_265">
+            <path id="Line_104" d="M0 0L9.5 0" class="cls-1"/>
+            <path id="Line_105" d="M0 16L0 0" class="cls-1" transform="translate(0 -.177)"/>
+            <path id="Line_106" d="M9.5 0L0 0" class="cls-1" transform="translate(0 16)"/>
+        </g>
+        <g id="Group_264" transform="translate(8 3)">
+            <path id="Line_107" d="M0 0L10.866 0" class="cls-2" transform="translate(0 5)"/>
+            <path id="Line_108" d="M0 0L5 5" class="cls-2" transform="translate(6.866)"/>
+            <path id="Line_109" d="M0 5L5 0" class="cls-2" transform="translate(6.866 5)"/>
+        </g>
+    </g>
+</svg>

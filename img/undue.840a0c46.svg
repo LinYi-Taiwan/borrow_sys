@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27">
+    <defs>
+        <style>
+            .cls-5{stroke:none}
+        </style>
+    </defs>
+    <g id="Group_217" transform="translate(-1058 -332)">
+        <circle id="Ellipse_13" cx="13.5" cy="13.5" r="13.5" fill="#dfc62d" transform="translate(1058 332)"/>
+        <g id="Group_212" fill="none" transform="rotate(37 968.622 63.555)">
+            <g id="Rectangle_49" stroke="#fff" stroke-width="1.5px" transform="translate(1217 219)">
+                <rect width="7.336" height="11.922" class="cls-5" rx="1"/>
+                <rect width="5.836" height="10.422" x=".75" y=".75" rx=".25"/>
+            </g>
+            <g id="Polygon_12">
+                <path d="M3.234.76a.5.5 0 0 1 .866 0l2.809 4.911a.5.5 0 0 1-.434.748H.862a.5.5 0 0 1-.434-.748z" class="cls-5" transform="rotate(180 612.168 118.212)"/>
+                <path fill="#fff" d="M3.668 2.419l-1.6 2.8h3.2l-1.6-2.8m0-1.911c.17 0 .338.084.434.252L6.91 5.67c.19.334-.05.748-.434.748H.862c-.384 0-.625-.414-.435-.748L3.234.76C3.33.592 3.5.508 3.668.508z" transform="rotate(180 612.168 118.212)"/>
+            </g>
+            <path id="Line_67" stroke="#fff" stroke-linecap="round" stroke-width="1.5px" d="M0 0L5 0" transform="translate(1218.092 223.186)"/>
+        </g>
+    </g>
+</svg>

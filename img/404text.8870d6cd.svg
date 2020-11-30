@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="274.693" height="112.448" viewBox="0 0 274.693 112.448">
+    <defs>
+        <style>
+            .cls-1{fill:#dfc62d}.cls-1,.cls-2{stroke:#dfc62d}.cls-1,.cls-2,.cls-4{stroke-linecap:round;stroke-width:11px}.cls-2,.cls-4,.cls-7{fill:none}.cls-4{stroke:#7e9a58}.cls-6{stroke:none}
+        </style>
+    </defs>
+    <g id="Group_674" transform="translate(-213.394 -125.552)">
+        <g id="Group_673" transform="translate(65 43.795)">
+            <g id="Group_670" transform="translate(164.136 89.5)">
+                <path id="Path_89" d="M60.822 0L12.636 58.414" class="cls-1" transform="translate(-12.636)"/>
+                <path id="Line_186" d="M68.197 0L0 0" class="cls-2" transform="translate(.246 58.744)"/>
+                <path id="Line_187" d="M0 0L0 95.205" class="cls-2" transform="translate(48.186)"/>
+            </g>
+            <g id="Group_671" transform="translate(349.145 89.5)">
+                <path id="Path_89-2" d="M60.822 0L12.636 58.414" class="cls-1" transform="translate(-12.636)"/>
+                <path id="Line_186-2" d="M68.197 0L0 0" class="cls-2" transform="translate(.246 58.744)"/>
+                <path id="Line_187-2" d="M0 0L0 95.205" class="cls-2" transform="translate(48.186)"/>
+            </g>
+            <g id="Ellipse_73" fill="none" stroke="#dfc62d" stroke-width="11px" transform="translate(257 95.205)">
+                <ellipse cx="34" cy="40" class="cls-6" rx="34" ry="40"/>
+                <ellipse cx="34" cy="40" class="cls-7" rx="28.5" ry="34.5"/>
+            </g>
+        </g>
+        <g id="Group_672" transform="translate(57 47.795)">
+            <g id="Group_670-2" transform="translate(164.136 89.5)">
+                <path id="Path_89-3" d="M60.822 0L12.636 58.414" class="cls-4" transform="translate(-12.636)"/>
+                <path id="Line_186-3" d="M68.197 0L0 0" class="cls-4" transform="translate(.246 58.744)"/>
+                <path id="Line_187-3" d="M0 0L0 95.205" class="cls-4" transform="translate(48.186)"/>
+            </g>
+            <g id="Group_671-2" transform="translate(349.145 89.5)">
+                <path id="Path_89-4" d="M60.822 0L12.636 58.414" class="cls-4" transform="translate(-12.636)"/>
+                <path id="Line_186-4" d="M68.197 0L0 0" class="cls-4" transform="translate(.246 58.744)"/>
+                <path id="Line_187-4" d="M0 0L0 95.205" class="cls-4" transform="translate(48.186)"/>
+            </g>
+            <g id="Ellipse_73-2" fill="none" stroke="#7e9a58" stroke-width="11px" transform="translate(257 95.205)">
+                <ellipse cx="34" cy="40" class="cls-6" rx="34" ry="40"/>
+                <ellipse cx="34" cy="40" class="cls-7" rx="28.5" ry="34.5"/>
+            </g>
+        </g>
+    </g>
+</svg>
