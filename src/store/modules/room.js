@@ -13,6 +13,9 @@ const state = {
     userData: [],
     selectTime: null,
     isLoading: false,
+    homeService: 'initial',
+    device: '',
+    showQuestion: false,
 }
 const api_url = 'https://borrowroombackend.herokuapp.com'
 // const api_url = 'http://localhost:8000'
@@ -21,6 +24,7 @@ const getters = {}
 
 const actions = {
     async Login({ commit }, googleUser) {
+        this.state.room.isLoading = true
         let token = googleUser.getAuthResponse(googleUser.getBasicProfile().getEmail())
         localStorage.tokens = JSON.stringify({
             accessToken: token['access_token'],
@@ -28,9 +32,10 @@ const actions = {
             user_name: googleUser.getBasicProfile().getName(),
         })
         await axios.post(`${api_url}/google/`, { token: token }).then((res) => console.log(res))
-        router.push('/allRooms')
+
+        router.push('/home')
     },
-    async getRoomPage({ commit }) {
+    async get_room_page({ commit }) {
         await axios
             .get(`${api_url}/RoomModule/`, {
                 params: {
@@ -39,10 +44,10 @@ const actions = {
                 },
             })
             .then((res) => {
-                this.state.roomPage = res.data
+                this.state.room.roomPage = res.data
             })
     },
-    async getRoomData({ commit }, room_name) {
+    async get_room_data({ commit }, room_name) {
         await axios
             .post(`${api_url}/RoomModule/`, {
                 function: 'get_room_data',
@@ -50,21 +55,31 @@ const actions = {
                 access_token: this.state.room.tokens.accessToken,
             })
             .then((res) => {
-                this.state.roomData = res.data
-                // commit("updateRoomData", res.data);
+                if (res['data']['error']) {
+                    console.log(res['data'])
+                    router.push('/*')
+                } else {
+                    this.state.roomData = res.data
+                }
             })
     },
-    async createNewBorrow({ commit }, createInfo) {
+    async create_new_borrow({ commit }, createInfo) {
+        this.state.room.isLoading = true
         await axios
             .post(`${api_url}/RoomModule/`, {
                 function: 'create_new_borrow',
                 data: createInfo,
                 access_token: this.state.room.tokens.accessToken,
             })
-            .then((res) => console.log(res))
-        router.push('/record')
-
-        // .then(res => console.log(res));
+            .then((res) => {
+                if (!res['data']['error']) {
+                    alert('借用成功！請至主頁查看借用紀錄。')
+                }
+            })
+            .catch((error) => {
+                alert('發生錯誤，請重新借用')
+            })
+        router.push('/home')
     },
     async get_user_borrow_data({ commit }, data) {
         let userInfo = { user_name: data }
@@ -89,9 +104,17 @@ const actions = {
             })
             .then((res) => console.log(res))
     },
+    async send_message_to_admin({ commit }, data) {
+        await axios
+            .post(`${api_url}/RoomModule/`, {
+                function: 'send_line_notify',
+                data,
+                access_token: this.state.room.tokens.accessToken,
+            })
+            .then((res) => console.log(res))
+    },
     async logout() {
         await localStorage.removeItem('tokens')
-        console.log(localStorage.tokens)
         this.state.room.isLoading = false
         router.push('/login')
     },

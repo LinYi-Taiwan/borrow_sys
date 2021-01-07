@@ -20,7 +20,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(90% - 108px);
+    height: calc(80vh - 108px);
     z-index: 1000;
 }
 
@@ -54,7 +54,7 @@ export default {
 }
 
 .loading-edge {
-    width: 98px;
+    width: 104px;
     height: 98px;
     background: url('../assets/loading_edge.svg');
     background-size: cover;

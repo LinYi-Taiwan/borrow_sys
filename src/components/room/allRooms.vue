@@ -10,27 +10,25 @@
                     </div>
                     <div class="rule">
                         <div>
-                            使用規範：
+                            使用規範：test
                         </div>
-                        <div>教室器材：</div>
-                        <div>教室狀態：</div>
+                        <div>教室器材：test</div>
+                        <div>教室狀態：test</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="page">
-            <img class="key-svg" src="@/assets/key.svg" alt="" />
-            <div class="page-text">教室借用</div>
-        </div>
+        <div class="page"></div>
         <div class="contain">
             <div class="room-box" v-for="(i, index) in room_page" :key="index">
-                <div class="box">
+                <div class="box" @click="openButton(i.name + index)">
                     <div class="room-text">
+                        <div class="room-svg"></div>
                         <div class="room-name">{{ i.name }}</div>
                         <div class="room-describe">地點：{{ i.location }}</div>
                         <div class="room-describe">可容納人數：{{ i.contain_num }}</div>
                     </div>
-                    <div class="button-box">
+                    <div class="button-box" :ref="i.name + index">
                         <router-link class="room-borrow" :to="'/allRooms/' + i.name">
                             <div class="borrow-svg"></div>
                         </router-link>
@@ -56,7 +54,10 @@ export default {
     name: 'allRooms',
     data() {
         return {
-            room_page: [],
+            room_page: [
+                { name: 'test1', location: 'test1', contain_num: 'testNum' },
+                { name: 'test1', location: 'test1', contain_num: 'testNum' },
+            ],
             delete_alert: false,
             select_room_info: {},
         }
@@ -64,15 +65,17 @@ export default {
 
     computed: {},
     methods: {
-        ...mapActions(['getRoomPage']),
+        ...mapActions(['get_room_page']),
+        openButton(room_name) {
+            this.$refs[room_name][0].style.display = 'flex'
+        },
     },
     async created() {
         this.$store.state.room.isLoading = true
-        await this.getRoomPage()
-        this.room_page = this.$store.state.roomPage
+        await this.get_room_page()
+        this.room_page = this.$store.state.room.roomPage
         this.$store.state.room.isLoading = false
     },
-    mounted() {},
 }
 </script>
 
@@ -89,12 +92,13 @@ export default {
     box-sizing: border-box;
     opacity: 0.85;
     transition: 0.5s;
+    position: absolute; /*safari 需要補position*/
 }
 .box:hover .button-box {
     display: flex;
 }
 .box:hover {
-    padding-left: 0;
+    padding-left: 6px;
 }
 .contain {
     display: flex;
@@ -128,6 +132,7 @@ export default {
     width: 134px;
     font-size: 18px;
     margin-bottom: 13px;
+    font-weight: bold;
 }
 .room-describe {
     width: 134px;
@@ -135,10 +140,6 @@ export default {
     margin-bottom: 4px;
 }
 .room-svg {
-    background: url('../../assets/green_key.svg') center;
-    margin: auto;
-    width: 36px;
-    height: 36px;
 }
 .page-text {
     width: 300px;
@@ -210,15 +211,15 @@ export default {
     visibility: hidden;
 }
 .info-svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     background: url('../../assets/info.svg') center;
     background-size: cover;
     visibility: hidden;
 }
 
 .modal-box {
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -314,6 +315,97 @@ export default {
     100% {
         -webkit-transform: translateY(0px);
         transform: translateY(0px);
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .page {
+        margin-left: 5.8vw;
+    }
+    .key-svg {
+        width: 5.7vw;
+        height: 5.36vw;
+        margin: auto;
+    }
+    .page-text {
+        font-size: 4.72vw;
+        height: 6.9vw;
+        line-height: 6.9vw;
+    }
+    .contain {
+        width: 100%;
+        height: auto;
+        justify-content: flex-start;
+    }
+    .room-box {
+        width: 37vw;
+        height: 43.6vw;
+        margin: 0;
+        margin-left: 9.4vw;
+        margin-bottom: 2.77vw;
+    }
+    .box {
+        width: 37vw;
+        height: 43.6vw;
+        border-radius: 7.77vw;
+        padding: 0;
+    }
+    .box:hover {
+        padding-left: 0;
+    }
+    .room-text {
+        margin: 0;
+    }
+    .room-name {
+        font-size: 2.5vw;
+        text-align: center;
+        margin-bottom: 2.2vw;
+        width: auto;
+    }
+    .room-describe {
+        font-size: 1.94vw;
+        text-align: center;
+        margin-bottom: 1.6vw;
+        width: auto;
+    }
+    .room-svg {
+        background: url('../../assets/2people.png') center;
+        background-size: cover;
+        width: 36.6vw;
+        height: 26.4vw;
+    }
+    .button-box {
+        width: 100%;
+        height: 0;
+        border-top-right-radius: 7.77vw;
+        border-top-left-radius: 7.77vw;
+        top: 0;
+    }
+    .box:hover .room-borrow {
+        width: 18.47vw;
+        height: 26.1vw;
+        border-top-left-radius: 7.77vw;
+        border-bottom-left-radius: 0;
+    }
+    .box:hover .room-info {
+        width: 18.8vw;
+        height: 26.1vw;
+        border-top-right-radius: 7.77vw;
+        border-bottom-right-radius: 0;
+    }
+    .room-borrow {
+        width: 18.47vw;
+        border-top-left-radius: 7.77vw;
+    }
+    .room-info {
+        width: 18.47vw;
+        border-top-right-radius: 7.77vw;
+    }
+    .alert-modal {
+        width: 90vw;
+    }
+    .room-img {
+        width: 26vw;
+        height: 26vw;
     }
 }
 </style>

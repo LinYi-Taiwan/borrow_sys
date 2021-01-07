@@ -1,19 +1,15 @@
 <template>
     <div class="room">
-        <div class="page">
-            <div class="key-svg"></div>
-            <div class="page-text">教室借用</div>
-        </div>
         <div class="content">
-            <div class="calendar">
-                <Calendar />
-            </div>
+            <Calendar />
+
             <div class="right">
                 <div class="up">
                     <div class="select-time">
                         {{ this.$store.state.room.selectTime }}
                     </div>
                     <div class="select">
+                        <div class="select-label">開始時間</div>
                         <select v-model="start_time" name="start_select" id="start_select">
                             <option v-for="time in start_time_options" :key="time.time + 'start'" :value="time">{{
                                 time.time
@@ -21,6 +17,7 @@
                         </select>
                     </div>
                     <div class="select">
+                        <div class="select-label">結束時間</div>
                         <select v-model="end_time" name="end_select" id="end_select">
                             <option v-for="time in end_time_options" :key="time.time + 'end'" :value="time">{{
                                 time.time
@@ -29,9 +26,13 @@
                     </div>
                 </div>
                 <div class="mid">
-                    <div class="square_box" ref="square">
+                    <div class="description-field">
+                        <div class="gray-block"></div>
+                        <div class="description">此空間已借用/超出時間</div>
+                    </div>
+                    <div class="square-box" ref="square">
                         <div
-                            class="time_square"
+                            class="time-square"
                             v-for="i in time_interval"
                             :key="i.id + 'time_interval'"
                             :class="{
@@ -43,10 +44,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="borrow-reason">
-                    借用事由
-                </div>
                 <div class="textarea-box">
+                    <div class="borrow-reason">
+                        借用事由
+                    </div>
                     <textarea type="text" v-model="borrow_reason" maxlength="30" placeholder="字數上限為30字..." />
                 </div>
                 <div class="submit-box">
@@ -68,7 +69,7 @@
                     <div
                         class="check-submit"
                         @click="
-                            createNewBorrow({
+                            create_new_borrow({
                                 start_time: start_time,
                                 end_time: end_time,
                                 borrow_room: $route.params.id,
@@ -91,6 +92,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import Calendar from '@/components/calendar'
 import axios from 'axios'
+import router from '@/router/router'
 
 export default {
     name: 'room',
@@ -107,15 +109,18 @@ export default {
         }
     },
     async created() {
+        this.watchRouter()
         this.$store.state.room.isLoading = true
-        await this.getRoomData(this.$route.params.id)
+        await this.get_room_data(this.$route.params.id)
         this.room_data = this.$store.state.roomData
         this.createTimeInterval()
         this.$store.state.room.isLoading = false
-        console.log(this.$store.state.room.selectTime)
     },
     computed: {
-        getDataByDay() {
+        watch_router() {
+            return this.$route.params.id
+        },
+        get_data_by_day() {
             this.createTimeInterval()
             return this.room_data.filter((data) => data.start_time.split('T')[0] === this.$store.state.room.selectTime)
         },
@@ -125,9 +130,12 @@ export default {
         },
         end_time_options() {
             if (this.start_time.id === undefined) return
-
             let time_list = []
-            // console.log(this.time_interval);
+
+            if (this.start_time.id === 47 && this.start_time.is_borrowed === false) {
+                time_list.push({ id: 48, time: '23:59' })
+            }
+
             for (let obj of this.time_interval.slice(this.start_time.id + 1)) {
                 time_list.push(obj)
                 if (obj.id === 47 && obj.is_borrowed === false) {
@@ -145,6 +153,9 @@ export default {
         },
     },
     watch: {
+        watch_router: function() {
+            this.watchRouter()
+        },
         watch_select_time: function() {
             this.createTimeInterval()
 
@@ -152,7 +163,7 @@ export default {
             let start_time_field = ''
             let time_obj = ''
             let now = new Date().getHours()
-            this.getDataByDay.forEach((element) => {
+            this.get_data_by_day.forEach((element) => {
                 //get the intervals
                 numOfInterval =
                     (new Date(element.end_time).getTime() - new Date(element.start_time).getTime()) / 1000 / 60 / 30
@@ -188,7 +199,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions(['userLogin', 'getRoomDate', 'getRoomData', 'createNewBorrow']),
+        ...mapActions(['get_room_data', 'create_new_borrow']),
 
         createTimeInterval() {
             let time_list = []
@@ -237,13 +248,19 @@ export default {
             }
             this.show_alert = !this.show_alert
         },
+        watchRouter() {
+            let router_confirm = this.$store.state.room.roomPage.find((data) => data.name === this.watch_router)
+            console.log(this.watch_router)
+            if (router_confirm === undefined) {
+                this.get_room_data(this.watch_router)
+                router.push(`/allRooms/${this.watch_router}`)
+            }
+        },
     },
 }
 </script>
 
 <style scoped>
-.calendar {
-}
 .room {
     display: flex;
     flex-direction: column;
@@ -275,7 +292,7 @@ export default {
     justify-content: center;
     width: 100%;
     height: 70%;
-    /* padding-left: 14.7vw; */
+    margin-top: 5%;
 }
 .up {
     display: flex;
@@ -284,7 +301,7 @@ export default {
 .mid {
     margin-bottom: 35.9px;
 }
-.time_square {
+.time-square {
     width: 11.8px;
     height: 15px;
     border: solid 1.5px white;
@@ -294,23 +311,23 @@ export default {
     transition: 0.5s;
     box-sizing: border-box;
 }
-.time_square:first-child {
+.time-square:first-child {
     width: 12px;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
     border-left: solid 3px white;
 }
-.time_square:last-child {
+.time-square:last-child {
     width: 11px;
     border-top-right-radius: 50%;
     border-bottom-right-radius: 50%;
     border-right: solid 3px white;
 }
-.square_box {
+.square-box {
     display: flex;
 }
 .disable {
-    background-color: #909986;
+    background-color: rgba(144, 153, 134, 0.6);
 }
 .scheduled {
     background-color: lightgreen;
@@ -319,14 +336,12 @@ export default {
     display: flex;
     flex-direction: column;
     margin-left: 61px;
-    /* padding-top: ; */
 }
 .clock {
     position: relative;
     top: 18px;
     left: -5px;
     font-size: 11px;
-
     color: #686b63;
     letter-spacing: -0.39px;
 }
@@ -335,7 +350,6 @@ export default {
     height: 46.3px;
     background-color: #b3cd71;
     font-size: 13px;
-
     text-align: center;
     font-weight: bold;
     line-height: 46.3px;
@@ -355,21 +369,15 @@ export default {
 textarea {
     width: 570px;
     height: 105px;
-    border: solid 0px white;
     border-radius: 10px;
-    opacity: 0.3;
+    background-color: rgba(255, 255, 255, 0.3);
     padding-top: 27px;
-    padding-left: 17px;
+    padding-left: 14px;
     resize: none;
     font-size: 12px;
     letter-spacing: 1.31px;
     box-sizing: border-box;
-}
-.textarea-box {
-    width: 569px;
-    height: 100px;
     border: solid 3px white;
-    border-radius: 10px;
 }
 textarea:focus {
     outline-width: 0;
@@ -386,7 +394,6 @@ textarea:focus {
     letter-spacing: 1.31px;
     text-align: center;
     color: #686b63;
-    /* z-index: 1; */
 }
 .submit-box {
     width: 569px;
@@ -420,21 +427,29 @@ select {
     width: 120.2px;
     height: 29.6px;
     border: solid 0px white;
+    color: white;
     border-radius: 20px;
     background-color: #7e9a58;
-    color: white;
     font-weight: bold;
     font-size: 12px;
     line-height: 23.6px;
     letter-spacing: 1.31px;
     text-align: center;
     padding-left: 34px;
-    margin-top: 16px;
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
     background: url('../../assets/select.svg') no-repeat scroll center transparent;
 }
+.select-label {
+    margin-left: 10px;
+    font-size: 10px;
+    letter-spacing: 6.43px;
+    text-align: left;
+    color: #686b63;
+    margin-bottom: 3.2px;
+}
+
 textarea,
 select,
 input,
@@ -445,9 +460,8 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     width: 100vw;
-    height: calc(90% - 108px);
     z-index: 1000;
     padding: auto;
     transition: 1s;
@@ -480,10 +494,8 @@ button {
     width: 243px;
     height: 36px;
     border-radius: 51px;
-    /* border: solid 5px #ffffff; */
     background-color: #b3cd71;
     font-size: 18px;
-
     letter-spacing: 1.93px;
     text-align: center;
     margin: 0 auto;
@@ -500,5 +512,113 @@ button {
     right: 0;
     margin: 21.3px 21.3px 0 0;
     cursor: pointer;
+}
+.description-field {
+    display: flex;
+    margin-bottom: 12.1px;
+}
+.gray-block {
+    width: 13px;
+    height: 13px;
+    background-color: rgba(144, 153, 134, 0.6);
+    border: solid 2px white;
+    border-radius: 3px;
+}
+.description {
+    width: auto;
+    font-size: 10px;
+    color: #686b63;
+    margin-left: 6px;
+}
+@media only screen and (max-width: 1024px) {
+    .content {
+        display: block;
+    }
+    .select-time {
+        width: 26.6vw;
+        height: 7.5vw;
+        line-height: 7.5vw;
+        box-sizing: border-box;
+        border-radius: 30.8vw;
+        background-color: #b3cd71;
+        margin-right: 2vw;
+        font-size: 2.77vw;
+        margin-top: 5vw;
+    }
+    .right {
+        margin: auto;
+    }
+    .up {
+        margin: 3vw auto;
+        padding-left: 5vw;
+    }
+    .square-box {
+        justify-content: center;
+    }
+    .time-square {
+        width: 1.8vw;
+        height: 3.7vw;
+        border: solid 0.25vw white;
+        border-top: solid 0.5vw white;
+        border-bottom: solid 0.5vw white;
+    }
+    .time-square:first-child {
+        width: 1.8vw;
+        border-left: solid 0.5vw white;
+    }
+    .time-square:last-child {
+        width: 1.8vw;
+        border-right: solid 0.5vw white;
+    }
+    .clock {
+        font-size: 2.1vw;
+        top: 4vw;
+    }
+    .mid {
+        margin: 0;
+    }
+    select {
+        width: 24vw;
+        height: 5.86vw;
+        padding-left: 4.77vw;
+        background-size: cover;
+    }
+    .select {
+        margin-right: 3.5vw;
+    }
+    .textarea-box {
+        width: 88vw;
+        margin: 5vw auto;
+    }
+    textarea {
+        width: 88vw;
+        height: 12.2vw;
+        padding-top: 1vw;
+        padding-left: 14vw;
+        font-size: 2.2vw;
+    }
+    .submit-box {
+        width: auto;
+        margin-bottom: 15vw;
+    }
+    .submit {
+        float: none;
+        margin: auto;
+    }
+    .borrow-reason {
+        width: 12.2vw;
+        height: 5.27vw;
+        font-size: 2.2vw;
+        top: 5.5vw;
+        line-height: 5.27vw;
+    }
+    .description-field {
+        width: fit-content;
+        margin: 2vw auto;
+        font-size: 2.2vw;
+    }
+    .alert-modal {
+        width: 90vw;
+    }
 }
 </style>

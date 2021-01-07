@@ -1,10 +1,13 @@
 <template>
     <div id="app">
-        <sideBar class="sideBar" v-if="`${this.$route.name}` !== 'login'" />
+        <div class="modal-box slide-top" v-show="$store.state.room.showQuestion === true">
+            <introduction />
+        </div>
+        <sideBar v-if="`${this.$route.name}` !== 'login'" />
         <myNav v-if="`${this.$route.name}` !== 'login' && $store.state.room.isLoading === false"></myNav>
         <loading class="loading-component" v-if="$store.state.room.isLoading === true" />
         <router-view class="router-view" v-show="$store.state.room.isLoading === false" />
-        <footer>
+        <footer v-if="`${this.$route.name}` === 'login'">
             <div>© 國立東華大學諮商與臨床心理學系｜教室借用系統｜NDHUCCP</div>
         </footer>
     </div>
@@ -15,21 +18,45 @@ import axios from 'axios'
 import myNav from '@/components/myNav'
 import sideBar from '@/components/SideBar'
 import loading from '@/components/Loading'
+import introduction from '@/components/introduction'
+import { mapState } from 'vuex'
+
 export default {
     name: 'App',
-    components: { myNav, sideBar, loading },
+    components: { myNav, sideBar, loading, introduction },
     data() {
         return {
             router_name: null,
         }
     },
     created() {
-        console.log(process.env)
-        console.log(process)
+        if (window.innerWidth < 1024) {
+            this.$store.state.room.device = 'phone'
+        } else {
+            this.$store.state.room.device = 'pc'
+        }
+    },
+    computed: {
+        watch_question_modal() {
+            return this.$store.state.room.showQuestion
+        },
+    },
+    watch: {
+        watch_question_modal: function() {
+            this.$store.state.room.showQuestion === true
+                ? (document.body.style.overflow = 'hidden')
+                : (document.body.style.overflow = 'auto')
+        },
     },
     mounted() {
-        console.log(process.env)
-        // alert(navigator.userAgent);
+        const that = this
+        window.onresize = () => {
+            return (() => {
+                window.innerWidth < 1024
+                    ? (this.$store.state.room.device = 'phone')
+                    : (this.$store.state.room.device = 'pc')
+            })()
+        }
     },
 }
 </script>
@@ -70,19 +97,18 @@ video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-    z-index: 99;
     text-decoration: none;
-
     font-family: 'Noto Sans TC', sans-serif;
 }
 
 #app {
     color: #2c3e50;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     min-width: 1200px;
     background-color: #ebde9e;
-    overflow: auto;
-    /* background: url("assets/backgroundImage.svg"); */
+    overflow: hidden;
+    background: url('assets/backgroundImage.svg') center;
     background-size: cover;
 }
 body::-webkit-scrollbar {
@@ -90,13 +116,16 @@ body::-webkit-scrollbar {
 }
 html {
     overflow: -moz-hidden-unscrollable; /*注意！若只打 hidden，chrome 的其它 hidden 會出問題*/
-    height: 100%;
+    /* height: 100%; */
+    height: auto;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
     height: 100%;
     width: 100vw; /*瀏覽器滾動條的長度大約是 18px*/
     overflow: auto;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 .big-logo {
     height: 100%;
@@ -104,18 +133,16 @@ body {
     right: -160px;
     top: -28px;
 }
-.sideBar {
-    position: absolute;
-    z-index: 1000;
-}
+
 footer {
     background-color: #7e9a58;
     position: fixed;
     bottom: 0;
-    min-width: 1200px;
+    /* min-width: 1200px; */
     width: 100%;
     height: 46px;
     line-height: 46px;
+    z-index: 99999;
 }
 footer div {
     display: flex;
@@ -131,7 +158,43 @@ footer div {
 }
 .router-view {
     /* height: calc(100% - 177px); */
-    margin-bottom: 100px;
-    margin-left: 58px;
+    margin: 5vw auto;
+}
+
+.modal-box {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100%;
+    z-index: 1000;
+    object-fit: contain;
+    background-color: rgba(0, 0, 0, 0.35);
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 1024px) {
+    #app {
+        width: 100vw;
+        min-width: 0;
+        background: url('assets/mobile_background.svg') center;
+        background-size: cover;
+    }
+    footer {
+        min-width: 0px;
+        height: 12.7vw;
+        line-height: 12.7vw;
+    }
+    footer div {
+        font-size: 3.2vw;
+        width: auto;
+        text-align: center;
+    }
+    .router-view {
+        margin: auto;
+    }
 }
 </style>
