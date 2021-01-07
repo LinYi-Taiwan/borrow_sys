@@ -26,14 +26,31 @@
                     <div class="navbar">
                         <div @click="show_modal = false" class="back-svg"></div>
                         <div>
-                            <textarea v-model="search_text" placeholder="輸入搜尋教室..." />
+                            <textarea v-model="search_text" placeholder="輸入關鍵字..." />
+                        </div>
+                        <div class="button-box">
+                            <div class="drop" @click="show_button = !show_button">
+                                <div>
+                                    {{ this.select_option[this.select_field] }}
+                                </div>
+                                <div class="drop-svg"></div>
+                            </div>
+                            <div v-if="show_button" class="drop-selection">
+                                <div v-for="(item, key) in select_option" :key="key" @click="field_search(key)">
+                                    {{ select_option[key] }}
+                                </div>
+                                <!-- <div @click="select_field = 'room'">搜教室</div>
+                                <div @click="select_field = 'borrow_reason'">搜事由</div> -->
+                            </div>
                         </div>
                     </div>
 
                     <div
-                        @click="show_reason(index)"
+                        @click="showReason(index)"
                         class="borrow-record-box"
+                        :class="{ 'borrow-record-extend': target_index === index }"
                         v-for="(i, index) in dataSearch"
+                        :ref="'box' + index"
                         :key="index"
                     >
                         <div class="record-left">
@@ -61,7 +78,7 @@
                         <div
                             :ref="index + 'cancel'"
                             v-if="target_index === index && recordStatus(i.start_time, i.end_time) === 'undue'"
-                            @click="edit(i)"
+                            @click="edit(i, index)"
                             class="mobile-edit-box"
                         >
                             <div class="mobile-delete"></div>
@@ -122,20 +139,24 @@ export default {
     data() {
         return {
             select_delete_data: [],
-            select_field: 'room',
             search_text: '',
             delete_alert: false,
+            cancel_index: '',
             show_modal: false,
             target_index: '',
+            show_button: false,
+            select_field: 'room',
+            select_option: { room: '搜教室', borrow_reason: '搜事由' },
         }
     },
     async created() {
         await this.get_user_borrow_data(this.$store.state.room.tokens.user_email)
+        console.log(this.$store.state.room.userData.data)
     },
     computed: {
         dataSearch() {
             if (this.search_text === '') return this.$store.state.room.userData.data
-            console.log(this.$store.state.room.userData.data)
+            console.log(this.select_option[this.select_field])
             return this.$store.state.room.userData.data.filter((data) =>
                 data[this.select_field].includes(this.search_text)
             )
@@ -174,12 +195,15 @@ export default {
             if (today - start > 0) return 'overtime'
             if (today - start < 0) return 'undue'
         },
-        edit(edit_data) {
-            console.log(edit_data)
+        edit(edit_data, index) {
+            this.cancel_index = 'box' + index
             this.select_delete_data = edit_data
             this.delete_alert = true
         },
         cancelBorrow() {
+            if (this.$store.state.room.device === 'phone') {
+                this.$refs[this.cancel_index][0].classList.add('record-clear')
+            }
             this.$store.state.room.userData.data = this.$store.state.room.userData.data.filter(
                 (element) =>
                     element.borrower === this.select_delete_data.borrower &&
@@ -199,8 +223,12 @@ export default {
             this.select_field = field
             this.$refs[this.select_field].forEach((element) => element.classList.add('select'))
         },
-        show_reason(index) {
+        showReason(index) {
             this.target_index === index ? (this.target_index = '') : (this.target_index = index)
+        },
+        field_search(key) {
+            this.select_field = key
+            this.show_button = false
         },
     },
     mounted() {},
@@ -237,12 +265,11 @@ td,
 th {
     width: 100px;
     height: 50px;
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
     color: #686b63;
     text-align: center;
-    line-height: 60px;
     border: solid 2.5px rgb(255, 255, 255, 1);
-    white-space: nowrap;
+    vertical-align: middle;
     max-width: 100px;
     text-overflow: ellipsis;
     padding: 0 10px 0 10px;
@@ -422,7 +449,7 @@ textarea:focus {
         background: url('../assets/home_record.svg') center;
         background-size: cover;
         margin: auto;
-        margin-top: 5.27vw;
+        margin-top: 4.27vw;
     }
     .button-text {
         font-size: 2.77vw;
@@ -464,7 +491,6 @@ textarea:focus {
     }
     .borrow-record-box {
         width: 86.1vw;
-        /* height: 15.83vw; */
         height: fit-content;
         background-color: white;
         border-radius: 15px;
@@ -473,6 +499,16 @@ textarea:focus {
         display: flex;
         justify-content: center;
         align-items: center;
+        /* max-height: 35vw; */
+        max-height: 15.83vw;
+        /* transition: 0.5s; */
+    }
+    .borrow-record-extend {
+        max-height: 35vw !important;
+    }
+    .record-clear {
+        max-height: 0px !important;
+        transition: 0.2s;
     }
     .borrow-record-box:last-child {
         margin-bottom: 5vw;
@@ -554,11 +590,74 @@ textarea:focus {
     }
     .navbar {
         display: flex;
+        position: relative;
         margin-top: 10vw;
         margin-bottom: 5vw;
     }
     textarea {
         height: 7.5vw;
+        margin-left: 1.3vw;
+        width: 55vw;
+        font-size: 2.67vw;
+        line-height: 5.5vw;
+    }
+    .button-box {
+        position: absolute;
+        right: 0;
+        margin: auto;
+        z-index: 1000;
+        width: 22vw;
+        margin-top: 0.25vw;
+    }
+    .drop {
+        width: 17.7vw;
+        height: 6.6vw;
+        object-fit: contain;
+        opacity: 0.8;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.16);
+        background-color: #96c45a;
+        color: white;
+        text-align: center;
+        margin-bottom: 2.7vw;
+        font-size: 2.5vw;
+        line-height: 6.6vw;
+        margin: auto;
+        display: flex;
+        padding-left: 2.63vw;
+        margin-left: 2.63vw;
+    }
+    .drop div {
+        font-size: 2.63vw;
+    }
+    .drop-selection {
+        border-radius: 5px;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        background-color: #ffffff;
+        padding: 1.38vw 1.94vw 0.03vw 1.38vw;
+        width: 100%;
+    }
+    .drop-selection div {
+        width: 17.7vw;
+        height: 6.6vw;
+        object-fit: contain;
+        opacity: 0.8;
+        border-radius: 5px;
+        box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.16);
+        background-color: #96c45a;
+        color: white;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 1.35vw;
+        font-size: 2.5vw;
+        line-height: 6.6vw;
+    }
+    .drop-svg {
+        background: url('../assets/drop.svg') center;
+        background-size: cover;
+        width: 2.63vw;
+        height: 1.63vw;
+        margin: auto;
     }
 }
 </style>

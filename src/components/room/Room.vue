@@ -18,7 +18,7 @@
                     </div>
                     <div class="select">
                         <div class="select-label">結束時間</div>
-                        <select aria-placeholder="123test" v-model="end_time" name="end_select" id="end_select">
+                        <select v-model="end_time" name="end_select" id="end_select">
                             <option v-for="time in end_time_options" :key="time.time + 'end'" :value="time">{{
                                 time.time
                             }}</option>
@@ -69,7 +69,7 @@
                     <div
                         class="check-submit"
                         @click="
-                            createNewBorrow({
+                            create_new_borrow({
                                 start_time: start_time,
                                 end_time: end_time,
                                 borrow_room: $route.params.id,
@@ -92,6 +92,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex'
 import Calendar from '@/components/calendar'
 import axios from 'axios'
+import router from '@/router/router'
 
 export default {
     name: 'room',
@@ -108,14 +109,18 @@ export default {
         }
     },
     async created() {
+        this.watchRouter()
         this.$store.state.room.isLoading = true
-        await this.getRoomData(this.$route.params.id)
+        await this.get_room_data(this.$route.params.id)
         this.room_data = this.$store.state.roomData
         this.createTimeInterval()
         this.$store.state.room.isLoading = false
     },
     computed: {
-        getDataByDay() {
+        watch_router() {
+            return this.$route.params.id
+        },
+        get_data_by_day() {
             this.createTimeInterval()
             return this.room_data.filter((data) => data.start_time.split('T')[0] === this.$store.state.room.selectTime)
         },
@@ -125,9 +130,12 @@ export default {
         },
         end_time_options() {
             if (this.start_time.id === undefined) return
-
             let time_list = []
-            // console.log(this.time_interval);
+
+            if (this.start_time.id === 47 && this.start_time.is_borrowed === false) {
+                time_list.push({ id: 48, time: '23:59' })
+            }
+
             for (let obj of this.time_interval.slice(this.start_time.id + 1)) {
                 time_list.push(obj)
                 if (obj.id === 47 && obj.is_borrowed === false) {
@@ -145,6 +153,9 @@ export default {
         },
     },
     watch: {
+        watch_router: function() {
+            this.watchRouter()
+        },
         watch_select_time: function() {
             this.createTimeInterval()
 
@@ -152,7 +163,7 @@ export default {
             let start_time_field = ''
             let time_obj = ''
             let now = new Date().getHours()
-            this.getDataByDay.forEach((element) => {
+            this.get_data_by_day.forEach((element) => {
                 //get the intervals
                 numOfInterval =
                     (new Date(element.end_time).getTime() - new Date(element.start_time).getTime()) / 1000 / 60 / 30
@@ -188,7 +199,7 @@ export default {
         },
     },
     methods: {
-        ...mapActions(['userLogin', 'getRoomDate', 'getRoomData', 'createNewBorrow']),
+        ...mapActions(['get_room_data', 'create_new_borrow']),
 
         createTimeInterval() {
             let time_list = []
@@ -236,6 +247,14 @@ export default {
                 return alert('請輸入借用原因')
             }
             this.show_alert = !this.show_alert
+        },
+        watchRouter() {
+            let router_confirm = this.$store.state.room.roomPage.find((data) => data.name === this.watch_router)
+            console.log(this.watch_router)
+            if (router_confirm === undefined) {
+                this.get_room_data(this.watch_router)
+                router.push(`/allRooms/${this.watch_router}`)
+            }
         },
     },
 }
@@ -353,14 +372,12 @@ textarea {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.3);
     padding-top: 27px;
-    padding-left: 17px;
+    padding-left: 14px;
     resize: none;
     font-size: 12px;
     letter-spacing: 1.31px;
     box-sizing: border-box;
     border: solid 3px white;
-}
-.textarea-box {
 }
 textarea:focus {
     outline-width: 0;
@@ -430,6 +447,7 @@ select {
     letter-spacing: 6.43px;
     text-align: left;
     color: #686b63;
+    margin-bottom: 3.2px;
 }
 
 textarea,
@@ -522,10 +540,10 @@ button {
         line-height: 7.5vw;
         box-sizing: border-box;
         border-radius: 30.8vw;
-        margin: auto;
         background-color: #b3cd71;
         margin-right: 2vw;
         font-size: 2.77vw;
+        margin-top: 5vw;
     }
     .right {
         margin: auto;
@@ -540,17 +558,17 @@ button {
     .time-square {
         width: 1.8vw;
         height: 3.7vw;
-        border: solid 0.1vw white;
-        border-top: solid 0.2vw white;
-        border-bottom: solid 0.2vw white;
+        border: solid 0.25vw white;
+        border-top: solid 0.5vw white;
+        border-bottom: solid 0.5vw white;
     }
     .time-square:first-child {
         width: 1.8vw;
-        border-left: solid 0.2vw white;
+        border-left: solid 0.5vw white;
     }
     .time-square:last-child {
         width: 1.8vw;
-        border-right: solid 0.2vw white;
+        border-right: solid 0.5vw white;
     }
     .clock {
         font-size: 2.1vw;
@@ -591,7 +609,7 @@ button {
         width: 12.2vw;
         height: 5.27vw;
         font-size: 2.2vw;
-        top: 6vw;
+        top: 5.5vw;
         line-height: 5.27vw;
     }
     .description-field {

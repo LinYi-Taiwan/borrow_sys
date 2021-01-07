@@ -17,6 +17,7 @@ export default {
 <style scoped>
 .logo-home {
     display: flex;
+    /* position: absolute; */
     height: 57px;
     margin: 32px 0 30.9px 156px;
 }

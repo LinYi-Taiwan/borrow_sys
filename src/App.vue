@@ -36,7 +36,18 @@ export default {
             this.$store.state.room.device = 'pc'
         }
     },
-    computed: mapState(['device']),
+    computed: {
+        watch_question_modal() {
+            return this.$store.state.room.showQuestion
+        },
+    },
+    watch: {
+        watch_question_modal: function() {
+            this.$store.state.room.showQuestion === true
+                ? (document.body.style.overflow = 'hidden')
+                : (document.body.style.overflow = 'auto')
+        },
+    },
     mounted() {
         const that = this
         window.onresize = () => {
@@ -97,7 +108,7 @@ video {
     min-width: 1200px;
     background-color: #ebde9e;
     overflow: hidden;
-    background: url('assets/backgroundImage.svg');
+    background: url('assets/backgroundImage.svg') center;
     background-size: cover;
 }
 body::-webkit-scrollbar {
@@ -147,8 +158,7 @@ footer div {
 }
 .router-view {
     /* height: calc(100% - 177px); */
-    margin-bottom: 100px;
-    margin-left: 58px;
+    margin: 5vw auto;
 }
 
 .modal-box {
@@ -170,6 +180,8 @@ footer div {
     #app {
         width: 100vw;
         min-width: 0;
+        background: url('assets/mobile_background.svg') center;
+        background-size: cover;
     }
     footer {
         min-width: 0px;

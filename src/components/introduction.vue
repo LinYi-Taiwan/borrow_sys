@@ -1,15 +1,21 @@
 <template>
     <div class="background-canvas">
-        <div class="title-box" v-if="device === 'phone'">
+        <div class="title-box" v-if="$store.state.room.device === 'phone'">
             <div class="title">
                 <div class="question"></div>
                 <div class="title-text">系統使用說明</div>
             </div>
             <img class="cancel" @click="showQuestion()" src="../assets/cancel.svg" alt="" />
         </div>
-        <img class="cancel" v-if="device === 'computer'" @click="showQuestion()" src="../assets/cancel.svg" alt="" />
+        <img
+            class="cancel"
+            v-if="$store.state.room.device === 'pc'"
+            @click="showQuestion()"
+            src="../assets/cancel.svg"
+            alt=""
+        />
 
-        <div class="progress" v-if="device === 'phone'">
+        <div class="progress" v-if="$store.state.room.device === 'phone'">
             <div class="step" :class="{ 'current-page-step': this.touch.step === 0 }">1</div>
             <div class="step-line"></div>
             <div class="step" :class="{ 'current-page-step': this.touch.step === 1 }">2</div>
@@ -70,12 +76,9 @@ export default {
                 step: 0,
                 distance: 0,
             },
-            device: '',
         }
     },
-    created() {
-        window.innerWidth <= 1024 ? (this.device = 'phone') : (this.device = 'computer')
-    },
+    created() {},
     computed: {},
     methods: {
         showQuestion() {
@@ -104,8 +107,6 @@ export default {
                 this.touch.endX = 0
                 return
             }
-
-            console.log(this.listPositionMove.transform)
         },
     },
     mounted() {

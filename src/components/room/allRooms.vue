@@ -65,18 +65,17 @@ export default {
 
     computed: {},
     methods: {
-        ...mapActions(['getRoomPage']),
+        ...mapActions(['get_room_page']),
         openButton(room_name) {
             this.$refs[room_name][0].style.display = 'flex'
         },
     },
     async created() {
         this.$store.state.room.isLoading = true
-        await this.getRoomPage()
-        this.room_page = this.$store.state.roomPage
+        await this.get_room_page()
+        this.room_page = this.$store.state.room.roomPage
         this.$store.state.room.isLoading = false
     },
-    mounted() {},
 }
 </script>
 
@@ -133,6 +132,7 @@ export default {
     width: 134px;
     font-size: 18px;
     margin-bottom: 13px;
+    font-weight: bold;
 }
 .room-describe {
     width: 134px;
@@ -211,8 +211,8 @@ export default {
     visibility: hidden;
 }
 .info-svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     background: url('../../assets/info.svg') center;
     background-size: cover;
     visibility: hidden;
@@ -387,7 +387,7 @@ export default {
         border-bottom-left-radius: 0;
     }
     .box:hover .room-info {
-        width: 18.47vw;
+        width: 18.8vw;
         height: 26.1vw;
         border-top-right-radius: 7.77vw;
         border-bottom-right-radius: 0;

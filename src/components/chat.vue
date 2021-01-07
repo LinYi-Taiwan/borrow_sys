@@ -3,7 +3,7 @@
         <div v-show="service === 'initial'" class="function-box-content">
             <div class="chat-canvas" @click="select_service('chat')">
                 <div class="chat-svg"></div>
-                <div>聯絡管理員</div>
+                <div class="chat-text">聯絡管理員</div>
             </div>
         </div>
         <!-- two dom is a bad solution ,fixed it later -->
@@ -25,11 +25,12 @@
                     <div class="chat-input">
                         <textarea
                             @keydown.enter.exact.prevent
-                            @keydown.enter="sendMessage()"
+                            @keydown.enter="send_message()"
                             v-model="message"
                             placeholder="輸入問題..."
+                            ref="text-area"
                         ></textarea>
-                        <div ref="send" @click="sendMessage()" class="submit-svg"></div>
+                        <div ref="send" @click="send_message()" class="submit-svg"></div>
                     </div>
                 </div>
             </div>
@@ -53,11 +54,12 @@
             <div class="chat-input">
                 <textarea
                     @keydown.enter.exact.prevent
-                    @keydown.enter="sendMessage()"
+                    @keydown.enter="send_message()"
                     v-model="message"
                     placeholder="輸入問題..."
+                    ref="text-area"
                 ></textarea>
-                <div ref="send" @click="sendMessage()" class="submit-svg"></div>
+                <div ref="send" @click="send_message()" class="submit-svg"></div>
             </div>
         </div>
     </div>
@@ -76,26 +78,28 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['sendMessageToAdmin']),
+        ...mapActions(['send_message_to_admin']),
         select_service(service) {
             this.service = service
         },
-        async sendMessage(e) {
+        async send_message(e) {
             if (this.message === '') return
             this.textBox.push(this.message)
-            console.log(this.$refs['send'])
             this.$refs['send'].classList.add('rotate')
-            await this.sendMessageToAdmin(this.$store.state.room.tokens.user_name + '向管理員詢問：' + this.message)
+            this.$refs['text-area'].disabled = true
+
+            await this.send_message_to_admin(this.$store.state.room.tokens.user_name + '向管理員詢問：' + this.message)
             this.$refs['send'].classList.remove('rotate')
+            this.$refs['text-area'].disabled = false
 
             this.message = ''
         },
-        scrollToBottom() {
+        scroll_to_bottom() {
             this.$refs['chat-content'].scrollTop = this.$refs['chat-content'].scrollHeight
         },
     },
     updated() {
-        this.scrollToBottom()
+        this.scroll_to_bottom()
     },
 }
 </script>
@@ -162,12 +166,11 @@ export default {
     display: flex;
 }
 textarea {
-    opacity: 0.3;
     resize: none;
     font-size: 15px;
     letter-spacing: 1.31px;
     border: none;
-    border-left: 2px solid #afafa5;
+    border-left: 2px solid rgba(175, 175, 165, 0.3);
     padding-left: 9.6px;
     box-sizing: border-box;
     line-height: 100%;
@@ -176,6 +179,7 @@ textarea {
 }
 textarea:focus {
     outline-width: 0;
+    outline: none !important;
 }
 .submit-svg {
     background: url('../assets/submit.svg') center;
@@ -273,7 +277,7 @@ textarea:focus {
 }
 .chat-canvas div {
     text-align: center;
-    margin: auto;
+    /* margin: auto; */
     font-size: 12px;
     letter-spacing: 3.32px;
 }
@@ -318,10 +322,11 @@ textarea:focus {
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        margin-top: 0px;
     }
     .chat-canvas div {
         text-align: center;
-        margin: auto;
+        /* margin: auto; */
         font-size: 2.77vw;
         letter-spacing: 0;
     }
@@ -370,10 +375,12 @@ textarea:focus {
     .function-box-content div {
         font-size: 2.77vw;
         text-align: center;
-        line-height: 8.3vw;
     }
     .text-area {
         max-width: 42.5vw;
+    }
+    .chat-text {
+        margin-top: 2vw;
     }
 }
 </style>

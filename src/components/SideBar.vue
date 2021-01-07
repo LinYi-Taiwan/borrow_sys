@@ -1,11 +1,11 @@
 <template>
     <div :class="{ sideBar: showBar }">
         <introduction v-if="showQuestion" />
-        <div class="mobile-selection" v-show="!showBar" @click="mobile_showBar()"></div>
+        <div class="mobile-selection" v-show="!showBar" @click="mobileShowBar()"></div>
         <div class="nav" :style="mobileBar_style">
-            <div class="mobile-selection-cancel" :class="{ invisible: !showBar }" @click="mobile_showBar()"></div>
+            <div class="mobile-selection-cancel" :class="{ invisible: !showBar }" @click="mobileShowBar()"></div>
 
-            <div class="sideBar-up" @click="mobile_showBar()">
+            <div class="sideBar-up" @click="mobileShowBar()">
                 <router-link to="/home">
                     <div class="router-container">
                         <div class="home"></div>
@@ -20,7 +20,7 @@
                 </router-link>
             </div>
 
-            <div class="sideBar-down" @click="mobile_showBar()">
+            <div class="sideBar-down" @click="mobileShowBar()">
                 <a @click="logout()">
                     <div class="router-container">
                         <div class="logout"></div>
@@ -35,7 +35,7 @@
                 </a>
             </div>
         </div>
-        <div class="mask" @click="mobile_showBar()" v-show="showBar"></div>
+        <div class="mask" @click="mobileShowBar()" v-show="showBar"></div>
     </div>
 </template>
 
@@ -67,7 +67,7 @@ export default {
             this.$store.state.room.showQuestion = !this.$store.state.room.showQuestion
         },
 
-        mobile_showBar() {
+        mobileShowBar() {
             if (this.$store.state.room.device === 'phone') {
                 this.showBar = !this.showBar
                 this.showBar === false

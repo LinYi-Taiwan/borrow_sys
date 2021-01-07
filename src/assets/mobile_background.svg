@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="360" height="640" viewBox="0 0 360 640">
+  <defs>
+    <filter id="Path_93" x="-336.904" y="392.952" width="1084.16" height="343.901" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_92" x="-167.549" y="446.299" width="947.313" height="215.785" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <clipPath id="clip-Android_Mobile_25">
+      <rect width="360" height="640"/>
+    </clipPath>
+  </defs>
+  <g id="Android_Mobile_25" data-name="Android Mobile – 25" clip-path="url(#clip-Android_Mobile_25)">
+    <rect width="360" height="640" fill="#ebde9e"/>
+    <g id="Group_700" data-name="Group 700" transform="translate(-5 31.528)">
+      <path id="Path_94" data-name="Path 94" d="M3974.579-11415.668s23.942-55.275,102.689-59.029,128.451,72,128.451,72l163.188,3.111s29.4-78.016,101.825-79.547,111.476,76.436,111.476,76.436l7.981,30.514-325.731,66.367-262.416,14.493Z" transform="translate(-4061.826 11846.576)" fill="#8ba863"/>
+      <g transform="matrix(1, 0, 0, 1, 5, -31.53)" filter="url(#Path_93)">
+        <path id="Path_93-2" data-name="Path 93" d="M3696.954-11473.874c64.956-23.8,138.484,10.849,187.965,66.079s75.369,88.26,75.369,88.26,25.344-132.979,158.841-154.339,215.026,95.829,215.026,95.829,15.861-102.628,137.839-118.494,207.263,155.694,207.263,155.694l-16.858,70.409-519.64,86.762-517.662-128.92S3632-11450.073,3696.954-11473.874Z" transform="translate(-3947 11905.53)" fill="#d9c33d"/>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, 5, -31.53)" filter="url(#Path_92)">
+        <path id="Path_92-2" data-name="Path 92" d="M3235.375-11219.267s66.662-112.032,199.4-120.424,217.177,120.424,217.177,120.424,68.125-141.782,221.456-153.988,258.37,168.411,258.37,168.411l-604.931,16.782H3214.46Z" transform="translate(-3367.01 11835.15)" fill="#b3cd71"/>
+      </g>
+    </g>
+  </g>
+</svg>

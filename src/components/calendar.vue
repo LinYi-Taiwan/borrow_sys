@@ -148,7 +148,7 @@ export default {
 
 <style scoped>
 .page-title {
-    width: 314px;
+    width: 100%;
     height: 27px;
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 24px;
@@ -349,11 +349,11 @@ export default {
         font-size: 4.72vw;
         height: 8.41vw;
         width: 8.41vw;
-        margin-right: 2vw;
+        margin-right: 1.7vw;
         line-height: 8.41vw;
     }
     .day-box {
-        padding-left: 1vw;
+        padding-left: 2vw;
         width: auto;
         height: auto;
     }

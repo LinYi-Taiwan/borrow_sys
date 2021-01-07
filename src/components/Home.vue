@@ -2,7 +2,9 @@
     <div class="background-canvas">
         <div class="canvas-left">
             <div class="box welcome">
-                <div class="hello-text">Hi， {{ $store.state.room.tokens.user_name }}</div>
+                <div class="hello-text">Hi， {{ $store.state.room.tokens.user_name }}！</div>
+                <div class=" hello-text-second">歡迎來到教室借用系統！</div>
+
                 <div class="button-box">
                     <div class="welcome-button">
                         <router-link to="/allRooms">
@@ -47,7 +49,7 @@ export default {
     display: flex;
     width: fit-content;
     height: auto;
-    margin: auto;
+    /* margin: auto; */
 }
 .canvas-left {
     width: 810px;
@@ -89,8 +91,6 @@ export default {
 .record {
     margin-left: 18px;
 }
-.button-box {
-}
 .welcome-button {
     width: 122px;
     height: 53px;
@@ -110,15 +110,19 @@ export default {
     margin-left: 30px;
     margin-top: 9.5px;
 }
+.hello-text-second {
+    margin-left: 30px;
+    font-size: 13px;
+}
 .button-box {
     width: 100%;
     margin-bottom: 21px;
-
     display: flex;
     position: absolute;
     bottom: 0;
     justify-content: space-evenly;
 }
+
 @media only screen and (max-width: 1024px) {
     .background-canvas {
         width: 78.3vw;
@@ -159,6 +163,12 @@ export default {
         letter-spacing: 0.5vw;
         text-align: left;
         color: #707070;
+        margin-top: 0;
+    }
+    .hello-text-second {
+        margin-left: 8.3vw;
+        font-size: 3.61vw;
+        letter-spacing: 0.5vw;
     }
     .button-box {
         margin-bottom: 5.7vw;

@@ -51,13 +51,12 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['Login', 'getRoomPage', 'getRoomData']),
+        ...mapActions(['Login', 'get_room_page']),
         async onSuccess(googleUser) {
             this.$store.state.room.isLoading = true
             // This only gets the user information: id, name, imageUrl and email
             await this.Login(googleUser)
-            this.getRoomPage()
-            this.$store.state.room.isLoading = false
+            this.get_room_page()
 
             // this.get_user_borrow_data(this.$store.state.room.tokens.user_email);
             // this.get_user_borrow_data();
@@ -67,7 +66,7 @@ export default {
         },
     },
     created() {
-        this.getRoomPage()
+        this.get_room_page()
     },
 }
 </script>
@@ -99,11 +98,13 @@ export default {
     line-height: 20px;
     color: #96c45a;
     margin: auto;
+    letter-spacing: 0.63px;
 }
 .title-down {
     height: 32px;
     font-size: 28px;
     color: #96c45a;
+    letter-spacing: 1.4px;
 }
 .line {
     width: 139.2px;
@@ -142,6 +143,7 @@ button:focus {
     background-size: cover;
     width: 44px;
     height: 52px;
+    margin-right: 4.1px;
 }
 @media only screen and (max-width: 1024px) {
     .loginBox {
